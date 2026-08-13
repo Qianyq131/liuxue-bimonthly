@@ -373,7 +373,7 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
   <div class="insight-item"><span class="insight-badge ib-top">TOP</span><span><b>国际课程 8 月冲量</b>：留资成本较大盘低 36%，搜索需求处于高位窗口；先解除冷启 0% 的扩量阻塞。</span></div>
   <div class="insight-item"><span class="insight-badge ib-warn">WARN</span><span><b>留学申请先提效</b>：留资成本较大盘高 108%，素材点击、进线开口、开口后留资连续三段承压。</span></div>
   <div class="insight-item"><span class="insight-badge ib-info">INFO</span><span><b>少儿英语稳盘</b>：CTR 与开口后转化优于大盘，下一步重点改善流量成本、冷启和搜索增量。</span></div>
-</div><div class="grid-2 fade-in-up" style="margin-bottom:18px">
+</div><div class="fade-in-up" style="margin-bottom:18px">
 <div class="chart-card fade-in-up">
   <div class="card-header">
     <span class="card-title">业务线消耗结构</span>
@@ -381,14 +381,6 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
     
   </div>
   <div id="chart_spend_mix" style="height:300px;width:100%"></div>
-</div>
-<div class="chart-card fade-in-up">
-  <div class="card-header">
-    <span class="card-title">留资成本 vs 大盘</span>
-    <span class="card-sub">差异百分比 · 越低越优</span>
-    
-  </div>
-  <div id="chart_lead_cost_gap" style="height:300px;width:100%"></div>
 </div></div>
 <div class="insight-text-block fade-in-up">
   <h3>总览解读</h3>
@@ -439,10 +431,10 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
 </div>
 <div class="glass-card fade-in-up" style="padding:0;overflow:hidden">
   <div class="table-wrap">
-    <table><colgroup><col style="width:100px"><col style="width:auto"><col style="width:auto"><col style="width:auto"><col style="width:auto"><col style="width:auto"></colgroup><thead><tr><th>业务线</th><th>客户消耗</th><th>CTR</th><th>留资成本</th><th>vs大盘</th><th>当前策略</th></tr></thead><tbody><tr class=""><td>留学申请</td><td>¥30.0万</td><td>3.89%</td><td>¥625</td><td>+108%</td><td>先提效：素材+承接三段优化</td></tr>
-<tr class="tr-alt"><td>少儿英语</td><td>¥25.7万</td><td>4.66%</td><td>¥448</td><td>+33%</td><td>稳盘：降流量成本、改善冷启</td></tr>
-<tr class=""><td>国际课程</td><td>¥29.1万</td><td>3.51%</td><td>¥375</td><td>-36%</td><td>8月冲量：解除冷启阻塞</td></tr>
-<tr class="tr-alt"><td>成人英语</td><td>¥7.8万</td><td>2.49%</td><td>¥360</td><td>-10%</td><td>重点增量：把雅思投起来</td></tr>
+    <table><colgroup><col style="width:100px"><col style="width:auto"><col style="width:auto"><col style="width:auto"><col style="width:auto"></colgroup><thead><tr><th>业务线</th><th>客户消耗</th><th>CTR</th><th>留资成本</th><th>当前策略</th></tr></thead><tbody><tr class=""><td>留学申请</td><td>¥30.0万</td><td>3.89%</td><td>¥625</td><td>先提效：素材+承接三段优化</td></tr>
+<tr class="tr-alt"><td>少儿英语</td><td>¥25.7万</td><td>4.66%</td><td>¥448</td><td>稳盘：降流量成本、改善冷启</td></tr>
+<tr class=""><td>国际课程</td><td>¥29.1万</td><td>3.51%</td><td>¥375</td><td>8月冲量：解除冷启阻塞</td></tr>
+<tr class="tr-alt"><td>成人英语</td><td>¥7.8万</td><td>2.49%</td><td>¥360</td><td>重点增量：把雅思投起来</td></tr>
 </tbody></table>
   </div>
 </div><div class="grid-2 fade-in-up" style="margin-top:18px;margin-bottom:18px">
@@ -456,11 +448,11 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
 </div>
 <div class="chart-card fade-in-up">
   <div class="card-header">
-    <span class="card-title">进线后转化能力</span>
-    <span class="card-sub">开口率 / 开口留资率</span>
+    <span class="card-title">留资成本：客户 vs 大盘</span>
+    <span class="card-sub">仅展示相对柱形；纵轴与悬浮具体数字均已隐藏</span>
     
   </div>
-  <div id="chart_conversion" style="height:320px;width:100%"></div>
+  <div id="chart_lead_cost_compare" style="height:320px;width:100%"></div>
 </div></div><div class="section-title fade-in-up" style="margin-top:30px"><div class="section-title-bar"></div><div><h2>2.1 留学申请业务线</h2><p>客户消耗 ¥30.0万 · 当前最紧迫：先修效率再扩量</p></div></div>
 <div class="insight-text-block fade-in-up">
   <h3>业务概况</h3>
@@ -944,30 +936,6 @@ try {
 } catch(e) { console.error('[chart:chart_spend_mix]', e); }
 
 try {
-  var chart_lead_cost_gap_inst = echarts.init(document.getElementById('chart_lead_cost_gap'));
-  chart_lead_cost_gap_inst.setOption({
-    backgroundColor:'transparent',
-    tooltip:{
-  backgroundColor:'rgba(255,255,255,0.97)',
-  borderColor:'rgba(0,0,0,0.10)',
-  textStyle:{color:'#1a2550'},
-  extraCssText:'box-shadow:0 4px 20px rgba(0,0,0,0.10);border-radius:8px;'
-},
-    grid:{ left:10, right:10, top:8, bottom:0, containLabel:true },
-      xAxis:{ type:'value', axisLine:{show:false},
-        splitLine:{lineStyle:{color:'rgba(0,0,0,0.05)'}},
-        axisLabel:{fontSize:10, formatter:function(v){return v+'%'}} },
-      yAxis:{ type:'category', data:['留学申请', '少儿英语', '国际课程', '成人英语'],
-        axisLabel:{fontSize:10}, axisTick:{show:false} },
-      series:[{ type:'bar', data:[108, 33, -36, -10], barMaxWidth:14,
-        itemStyle:{ borderRadius:[0,4,4,0],
-          color:function(p){var c=['#81D8D0','#A8E6CE','#FFD3B6','#FFAAA5','#FF8B94','#B5EAD7','#C7CEEA','#FFDAC1'];return c[p.dataIndex%c.length];} },
-        emphasis:{itemStyle:{shadowBlur:8,shadowColor:'rgba(77,126,255,0.35)'}}
-      }]
-  });
-} catch(e) { console.error('[chart:chart_lead_cost_gap]', e); }
-
-try {
   var chart_search_index_inst = echarts.init(document.getElementById('chart_search_index'));
   chart_search_index_inst.setOption({
     backgroundColor:'transparent', tooltip:{
@@ -993,7 +961,7 @@ try {
 } catch(e) { console.error('[chart:chart_search_index]', e); }
 
 try {var c=echarts.init(document.getElementById('chart_ctr_compare'));c.setOption({color:['#4D7EFF','#B8C2DD'],tooltip:{trigger:'axis'},legend:{bottom:0},grid:{left:45,right:20,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语']},yAxis:{type:'value',axisLabel:{formatter:'{value}%'}},series:[{name:'客户',type:'bar',data:[3.89,4.66,3.51,2.49],barMaxWidth:28},{name:'大盘',type:'bar',data:[6.12,3.14,4.26,4.79],barMaxWidth:28}]});}catch(e){console.error(e)}
-try {var c=echarts.init(document.getElementById('chart_conversion'));c.setOption({color:['#00A88F','#7B61FF'],tooltip:{trigger:'axis'},legend:{bottom:0},grid:{left:45,right:20,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语']},yAxis:{type:'value',max:100,axisLabel:{formatter:'{value}%'}},series:[{name:'进线开口率',type:'bar',data:[72.8,82.8,79.4,86.6],barMaxWidth:28},{name:'开口留资率',type:'bar',data:[57.4,62.3,62.3,58.6],barMaxWidth:28}]});}catch(e){console.error(e)}
+try {var c=echarts.init(document.getElementById('chart_lead_cost_compare'));c.setOption({color:['#4D7EFF','#B8C2DD'],tooltip:{show:false},legend:{bottom:0},grid:{left:18,right:18,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语'],axisTick:{show:false}},yAxis:{type:'value',show:false,axisLabel:{show:false},axisLine:{show:false},splitLine:{show:false}},series:[{name:'客户',type:'bar',data:[625,448,375,360],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}},{name:'大盘',type:'bar',data:[301,338,582,399],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}}]});}catch(e){console.error(e)}
 
 try {var c=echarts.init(document.getElementById('chart_month_spend'));c.setOption({color:['#B8C2DD','#4D7EFF'],tooltip:{trigger:'axis'},legend:{bottom:0},grid:{left:45,right:20,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语']},yAxis:{type:'value',axisLabel:{formatter:'¥{value}万'}},series:[{name:'6月',type:'bar',data:[15.4,15.45,18.72,1.74],barMaxWidth:28},{name:'7月',type:'bar',data:[14.63,10.13,10.40,6.02],barMaxWidth:28}]});}catch(e){console.error(e)}
 
