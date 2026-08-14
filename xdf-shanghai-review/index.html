@@ -950,6 +950,14 @@ try {
   });
 } catch(e) { console.error('[chart:chart_search_index]', e); }
 
+try {
+  var c = echarts.getInstanceByDom(document.getElementById('chart_search_index'));
+  if (c) c.setOption({
+    yAxis:{show:false,axisLabel:{show:false},axisLine:{show:false},axisTick:{show:false},splitLine:{show:false}},
+    grid:{left:18,right:20,top:25,bottom:48,containLabel:false}
+  });
+} catch(e) { console.error('[chart:chart_search_index-mask-yaxis]', e); }
+
 try {var c=echarts.init(document.getElementById('chart_ctr_compare'));c.setOption({color:['#4D7EFF','#B8C2DD'],tooltip:{show:false},legend:{bottom:0},grid:{left:45,right:20,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语']},yAxis:{type:'value',axisLabel:{formatter:'{value}%'}},series:[{name:'客户',type:'bar',data:[3.89,4.66,3.51,2.49],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}},{name:'大盘（区间）',type:'bar',data:[6.5,3.5,4.5,4.5],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}}]});}catch(e){console.error(e)}
 try {var c=echarts.init(document.getElementById('chart_lead_cost_compare'));c.setOption({color:['#4D7EFF','#B8C2DD'],tooltip:{show:false},legend:{bottom:0},grid:{left:18,right:18,top:20,bottom:45},xAxis:{type:'category',data:['留学申请','少儿英语','国际课程','成人英语'],axisTick:{show:false}},yAxis:{type:'value',show:false,axisLabel:{show:false},axisLine:{show:false},splitLine:{show:false}},series:[{name:'客户',type:'bar',data:[625,448,375,360],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}},{name:'大盘',type:'bar',data:[305,335,585,395],barMaxWidth:28,label:{show:false},emphasis:{disabled:true}}]});}catch(e){console.error(e)}
 
