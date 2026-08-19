@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新东方欧亚小语种 · 小红书营销洞察报告</title>
+<style>
+  :root {
+    --primary: #FF2442;
+    --primary-light: #FF6680;
+    --primary-dark: #C01030;
+    --secondary: #5252FF;
+    --accent: #00C9A7;
+    --bg: #FAFAFA;
+    --card-bg: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #666;
+    --border: #EEE;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #FF2442 0%, #FF6680 50%, #5252FF 100%); color: #fff; padding: 60px 20px 40px; text-align: center; }
+  .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 16px; opacity: 0.9; }
+  .header .meta { font-size: 13px; opacity: 0.8; margin-top: 12px; }
+  .tabs { display: flex; justify-content: center; background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.04); flex-wrap: wrap; }
+  .tab-btn { padding: 16px 24px; border: none; background: none; font-size: 15px; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
+  .tab-btn:hover { color: var(--primary); }
+  .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .tab-content { display: none; padding: 32px 20px; max-width: 1200px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+  .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+  .card-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .card-title::before { content: ""; width: 4px; height: 20px; background: var(--primary); border-radius: 2px; }
+  .section-title { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: var(--text); }
+  .conclusion-box { background: linear-gradient(135deg, #FFF0F3 0%, #F0F0FF 100%); border-left: 4px solid var(--primary); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-size: 15px; line-height: 1.8; }
+  .conclusion-box strong { color: var(--primary-dark); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th { background: #F8F8F8; padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: #FAFAFA; }
+  .highlight-row { background: #FFF0F3; }
+  .highlight-row td { font-weight: 600; }
+  .chart-container { background: #fff; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
+  .chart-container img { max-width: 100%; border-radius: 8px; }
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
+  .metric-card { background: linear-gradient(135deg, #FFF0F3 0%, #FFE0E8 100%); border-radius: 8px; padding: 20px; text-align: center; }
+  .metric-card .value { font-size: 28px; font-weight: 700; color: var(--primary); }
+  .metric-card .label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .badge-red { background: #FFE0E8; color: var(--primary); }
+  .badge-green { background: #E0F7F0; color: var(--accent); }
+  .badge-orange { background: #FFF3E0; color: #E67E22; }
+  .badge-blue { background: #E0E8FF; color: var(--secondary); }
+  .badge-gray { background: #F0F0F0; color: #999; }
+  .insight-box { background: #F8F9FA; border-radius: 8px; padding: 16px 20px; margin: 12px 0; border-left: 3px solid var(--secondary); }
+  .insight-box .insight-title { font-weight: 600; color: var(--secondary); margin-bottom: 8px; font-size: 14px; }
+  .note-link { display: inline-block; color: var(--primary); text-decoration: none; border-bottom: 1px dashed var(--primary); font-size: 13px; margin: 2px 0; word-break: break-all; }
+  .note-link:hover { text-decoration: none; opacity: 0.8; }
+  .user-card { background: #fff; border: 2px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
+  .user-card-header { background: linear-gradient(135deg, #FF2442 0%, #FF6680 100%); color: #fff; padding: 16px 20px; }
+  .user-card-header h3 { font-size: 18px; font-weight: 700; }
+  .user-card-header .tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-left: 8px; }
+  .user-card-body { padding: 20px; }
+  .stage-block { margin: 16px 0; padding: 16px; border-radius: 8px; border-left: 4px solid; }
+  .stage-early { border-color: #4CAF50; background: #F1F8E9; }
+  .stage-mid { border-color: #FF9800; background: #FFF3E0; }
+  .stage-late { border-color: var(--primary); background: #FFF0F3; }
+  .stage-title { font-weight: 700; margin-bottom: 8px; font-size: 15px; }
+  .note-list { margin: 8px 0; }
+  .note-list li { list-style: none; padding: 6px 0; border-bottom: 1px solid #EEE; font-size: 13px; }
+  .note-list li:last-child { border-bottom: none; }
+  .note-tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; margin-right: 6px; }
+  .note-tag-brand { background: var(--primary); color: #fff; }
+  .note-tag-comp { background: #999; color: #fff; }
+  .note-tag-field { background: var(--secondary); color: #fff; }
+  .sankey-iframe { width: 100%; height: 600px; border: none; border-radius: 8px; }
+  .priority-table td:first-child { font-weight: 700; text-align: center; }
+  .p0 { background: #FF2442; color: #fff; }
+  .p1 { background: #FF9800; color: #fff; }
+  .p2 { background: #2196F3; color: #fff; }
+  .p3 { background: #9E9E9E; color: #fff; }
+  .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 13px; }
+  @media (max-width: 768px) { .header h1 { font-size: 24px; } .tab-btn { padding: 12px 16px; font-size: 13px; } .card { padding: 16px; } table { font-size: 12px; } th, td { padding: 6px 8px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>新东方欧亚小语种 · 小红书营销洞察报告</h1>
+  <p>基于一方成交用户路径分析 + 结案报告供需分析</p>
+  <div class="meta">数据周期：2025-06-01 至 2026-06-30 ｜ 生成时间：2026-08-19</div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab(1)">用户画像分析</button>
+  <button class="tab-btn" onclick="switchTab(2)">用户路径分析</button>
+  <button class="tab-btn" onclick="switchTab(3)">供需分析</button>
+  <button class="tab-btn" onclick="switchTab(4)">行动建议</button>
+</div>
+
+<!-- ========== Tab 1: 用户画像分析 ========== -->
+<div class="tab-content active" id="tab1">
+
+  <div class="card">
+    <div class="card-title">平台价值验证</div>
+    <div class="conclusion-box">
+      <strong>新东方欧亚小语种的目标用户高度聚集于小红书平台。</strong>客户回传成交人群时间戳范围为 2025-06-01 至 2026-05-31，受灵犀报告数据窗口限制，本次可分析的内容路径范围为 2025-08-10 至 2026-06-30——分析窗口比人群窗口前后各短约 2 个月，部分早期成交用户的行为路径未被完整覆盖，因此<strong>有决策路径人数（2,321 人）</strong>的实际值应高于当前统计值。在此窗口内，品牌一方成交用户 <strong>4,016 人</strong>中，小红书可匹配到 <strong>4,016 人（匹配率 92.34%）</strong>，其中 <strong>2,321 人</strong>有完整的内容决策路径，充分证明目标用户正在这里做决策、比较、种草，小红书是不可忽视的核心营销阵地。
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">4,016</div>
+        <div class="label">匹配人数</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">92.34%</div>
+        <div class="label">匹配率</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">2,321</div>
+        <div class="label">有决策路径人数</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">整体画像结论</div>
+    <div class="conclusion-box">
+      新东方欧亚小语种成交用户的核心画像是<strong>"一线及新一线城市的年轻女性学习者"</strong>。性别上女性占 83%（TGI 131），年龄集中在 19-22 岁（24%，TGI 163）和 23-25 岁（15%，TGI 136）以及 36-40 岁（14%，TGI 125）三个波段——前两者对应大学在校生/应届生和职场新人群体，后者对应职场进阶/留学准备的成熟人群。地域上以上海（12.3%）、北京（8.9%）、深圳（3.9%）等一线城市为主，一线城市 TGI 高达 293。消费水平偏高，高消费占 39%（TGI 176）。品牌偏好上新东方自身 TGI 1003 排名第六，教育相关品牌（ETS、斯芬克、新航道、多邻国、雅思）占据前列。二十大人群标签以"心灵远行客"（22%，TGI 729）、"气场精英"（18%，TGI 664）、"娇宠彼得潘"（16%，TGI 619）为主，整体呈现"有留学/海外视野、追求自我提升、愿意为教育投入"的画像。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">基础属性</div>
+
+    <div class="section-title">性别分布</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">女性占绝对主导（83%），TGI 131 说明该人群对小红书内容消费高度活跃，内容调性可尝试以女性视角的"体验分享+学习打卡+老师推荐"为主。</p>
+    <table>
+      <tr><th>性别</th><th>占比</th><th>TGI</th><th>业务解读</th></tr>
+      <tr class="highlight-row"><td>女</td><td>83.16%</td><td>130.69</td><td>绝对主力，内容调性需女性视角</td></tr>
+      <tr><td>男</td><td>16.85%</td><td>46.58</td><td>男性严重偏低，非核心人群</td></tr>
+    </table>
+
+    <div class="section-title">年龄分布</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">核心年龄段为 19-22 岁（大学在校/应届）和 23-25 岁（职场新人/考研/留学过渡期），以及 36-40 岁（职场中坚/留学再出发），三个波段对应"留学前语培"、"职业进阶语培"和"留学再出发"三大场景。</p>
+    <table>
+      <tr><th>年龄段</th><th>占比</th><th>TGI</th><th>业务解读</th></tr>
+      <tr class="highlight-row"><td>19-22</td><td>24.39%</td><td>163.49</td><td>在校大学生/应届，留学语培核心人群</td></tr>
+      <tr class="highlight-row"><td>23-25</td><td>14.64%</td><td>135.61</td><td>职场新人/考研/留学过渡期</td></tr>
+      <tr><td>26-30</td><td>15.37%</td><td>95.44</td><td>职场进阶期</td></tr>
+      <tr><td>31-35</td><td>11.04%</td><td>84.30</td><td>低于大盘，非核心</td></tr>
+      <tr class="highlight-row"><td>36-40</td><td>14.08%</td><td>124.72</td><td>职场中坚/留学再出发</td></tr>
+      <tr><td>41以上</td><td>20.51%</td><td>96.81</td><td>兴趣学习/子女留学规划</td></tr>
+    </table>
+
+    <div class="section-title">婚恋状态</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">未婚占 64%（TGI 119），已婚 36%。已婚人群中有子女留学/二外启蒙需求。</p>
+    <table>
+      <tr><th>婚恋状态</th><th>占比</th><th>TGI</th><th>业务解读</th></tr>
+      <tr class="highlight-row"><td>未婚</td><td>63.95%</td><td>118.80</td><td>主力人群，自我提升/留学驱动</td></tr>
+      <tr><td>已婚</td><td>36.06%</td><td>98.08</td><td>子女留学/二外启蒙/职业转型</td></tr>
+    </table>
+
+    <div class="section-title">城市等级与地域分布</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">一线城市 TGI 293，远高于大盘。上海+北京+深圳+广州合计 28%，地域集中度极高。值得关注的是，苏州（TGI 149.35）和杭州（TGI 150.17）的 TGI 均高于广州（102.37）和深圳（142.38）——虽然苏杭绝对人数排在广深之后，但相对大盘的偏好度更强，说明新一线城市的留学/语培需求密度甚至超过部分一线城市，值得加大投放和内容布局。</p>
+    <table>
+      <tr><th>城市等级</th><th>占比</th><th>TGI</th></tr>
+      <tr class="highlight-row"><td>一线</td><td>35.77%</td><td>292.71</td></tr>
+      <tr><td>新一线</td><td>23.59%</td><td>112.80</td></tr>
+      <tr><td>二线</td><td>14.21%</td><td>74.40</td></tr>
+      <tr><td>三线</td><td>7.68%</td><td>42.85</td></tr>
+      <tr><td>四线</td><td>3.95%</td><td>24.47</td></tr>
+      <tr><td>五线</td><td>2.33%</td><td>22.95</td></tr>
+    </table>
+    <table>
+      <tr><th>排名</th><th>地区</th><th>占比</th><th>TGI</th><th>业务解读</th></tr>
+      <tr class="highlight-row"><td>1</td><td>上海</td><td>12.30%</td><td>358.10</td><td>第一大市场，留学/语培需求最旺盛</td></tr>
+      <tr class="highlight-row"><td>2</td><td>北京</td><td>8.91%</td><td>279.61</td><td>第二大市场，教育资源集中</td></tr>
+      <tr><td>3</td><td>深圳</td><td>3.87%</td><td>142.38</td><td>第三大市场，年轻职场人群体</td></tr>
+      <tr><td>4</td><td>杭州</td><td>3.02%</td><td>150.17</td><td>新一线核心，消费力强</td></tr>
+      <tr><td>5</td><td>广州</td><td>2.89%</td><td>102.37</td><td>华南重点市场</td></tr>
+      <tr><td>6</td><td>苏州</td><td>2.36%</td><td>149.35</td><td>新一线，制造业/外贸驱动</td></tr>
+      <tr><td>7</td><td>成都</td><td>1.99%</td><td>82.57</td><td>西南重点市场</td></tr>
+      <tr><td>8</td><td>南京</td><td>1.30%</td><td>108.46</td><td>长三角教育重镇</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">消费特征</div>
+
+    <div class="section-title">消费能力</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">高消费占 39%（TGI 176），中消费 59%。整体付费意愿强。</p>
+    <table>
+      <tr><th>消费行为</th><th>占比</th><th>TGI</th></tr>
+      <tr class="highlight-row"><td>高消费</td><td>38.97%</td><td>175.94</td></tr>
+      <tr><td>中消费</td><td>58.50%</td><td>82.34</td></tr>
+      <tr><td>低消费</td><td>2.54%</td><td>37.29</td></tr>
+    </table>
+
+    <div class="section-title">品牌偏好（按 TGI 排序 Top 10）</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">教育留学品牌占据前列——ETS（TGI 3689）、斯芬克（TGI 2441）、A-Level（TGI 2131）、新航道（TGI 1034）、新东方（TGI 1003）、多邻国（TGI 891）、雅思（TGI 814）。说明这批人高度关注留学/考级/语培，是"留学+语培"组合需求人群。</p>
+    <table>
+      <tr><th>排名</th><th>品牌</th><th>占比</th><th>TGI</th></tr>
+      <tr><td>1</td><td>ETS</td><td>0.30%</td><td>3689.16</td></tr>
+      <tr><td>2</td><td>斯芬克</td><td>0.23%</td><td>2441.00</td></tr>
+      <tr><td>3</td><td>A-Level</td><td>0.27%</td><td>2131.47</td></tr>
+      <tr><td>4</td><td>德勤</td><td>0.23%</td><td>1067.88</td></tr>
+      <tr><td>5</td><td>新航道</td><td>0.60%</td><td>1033.63</td></tr>
+      <tr class="highlight-row"><td>6</td><td>新东方</td><td>7.10%</td><td>1003.03</td></tr>
+      <tr><td>7</td><td>中信书店</td><td>0.33%</td><td>918.53</td></tr>
+      <tr><td>8</td><td>多邻国</td><td>2.81%</td><td>890.90</td></tr>
+      <tr><td>9</td><td>雅思</td><td>1.04%</td><td>813.84</td></tr>
+      <tr><td>10</td><td>久趣</td><td>0.60%</td><td>783.84</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">内容偏好</div>
+
+    <div class="section-title">内容关键词偏好（Top 10）</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">高频内容关键词以"留学""日本""韩国""签证""法语""日语"为主，说明用户内容消费围绕"留学规划+语言学习+签证出国"三大场景。内容策略应围绕这三个场景做组合产出。</p>
+    <table>
+      <tr><th>关键词</th><th>占比</th><th>场景解读</th></tr>
+      <tr class="highlight-row"><td>休闲玩乐</td><td>29.95%</td><td>生活方式内容消费活跃</td></tr>
+      <tr><td>艺术</td><td>25.68%</td><td>艺术留学/兴趣学习</td></tr>
+      <tr class="highlight-row"><td>留学</td><td>14.77%</td><td>留学规划核心场景</td></tr>
+      <tr><td>学习</td><td>15.92%</td><td>学习方法/打卡内容</td></tr>
+      <tr><td>日本</td><td>13.80%</td><td>日本留学/语培核心市场</td></tr>
+      <tr><td>韩国</td><td>8.88%</td><td>韩国留学/韩语学习</td></tr>
+      <tr><td>留学生</td><td>7.28%</td><td>留学生体验分享</td></tr>
+      <tr><td>香港</td><td>7.49%</td><td>香港留学/出行</td></tr>
+      <tr><td>首尔</td><td>5.02%</td><td>韩国目的地内容</td></tr>
+      <tr><td>签证</td><td>6.81%</td><td>签证办理场景</td></tr>
+    </table>
+
+    <div class="section-title">搜索词偏好（Top 10）</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">搜索词偏好以"日本签证""韩国签证""西班牙""济州岛""世界杯"为主，说明用户处于"出国准备/海外文化探索"阶段，语言学习是出国准备的工具。</p>
+    <table>
+      <tr><th>搜索词</th><th>占比</th><th>TGI</th><th>场景解读</th></tr>
+      <tr><td>appstore怎么切换帐号</td><td>1.05%</td><td>1373.74</td><td>海外应用使用</td></tr>
+      <tr><td>oliveyoung必买</td><td>0.80%</td><td>913.09</td><td>韩国美妆消费</td></tr>
+      <tr class="highlight-row"><td>日本签证</td><td>0.70%</td><td>907.28</td><td>日本留学/出行准备</td></tr>
+      <tr><td>济州岛</td><td>0.80%</td><td>763.68</td><td>韩国目的地</td></tr>
+      <tr><td>阿根廷</td><td>1.08%</td><td>694.17</td><td>西语文化兴趣</td></tr>
+      <tr><td>世界杯决赛</td><td>1.40%</td><td>659.63</td><td>体育文化</td></tr>
+      <tr class="highlight-row"><td>西班牙</td><td>0.83%</td><td>631.49</td><td>西语留学/文化</td></tr>
+      <tr><td>韩国签证</td><td>0.64%</td><td>593.87</td><td>韩国出行准备</td></tr>
+      <tr><td>梅西</td><td>0.83%</td><td>576.06</td><td>体育文化</td></tr>
+      <tr><td>mina</td><td>1.28%</td><td>536.69</td><td>日韩文化</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">生活方式（二十大人群）</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">"心灵远行客"（22%，TGI 729）、"气场精英"（18%，TGI 664）、"娇宠彼得潘"（16%，TGI 619）位列前三。整体呈现"有海外视野、追求心灵成长、愿意为品质投入"的生活方式画像。</p>
+    <table>
+      <tr><th>人群标签</th><th>占比</th><th>TGI</th><th>解读</th></tr>
+      <tr class="highlight-row"><td>心灵远行客</td><td>21.79%</td><td>728.55</td><td>追求精神成长+海外体验，留学/语言学习的核心驱动</td></tr>
+      <tr><td>气场精英</td><td>17.72%</td><td>663.92</td><td>职场进阶+品质生活，职业语培需求</td></tr>
+      <tr><td>娇宠彼得潘</td><td>16.39%</td><td>619.34</td><td>年轻悦己+兴趣驱动，兴趣学语言</td></tr>
+      <tr><td>短逃离自愈派</td><td>8.67%</td><td>575.65</td><td>短期出行/逃离需求</td></tr>
+      <tr><td>友伴式父母</td><td>5.07%</td><td>557.58</td><td>已有子女，子女语培/留学规划</td></tr>
+      <tr><td>优奢享法</td><td>40.21%</td><td>534.70</td><td>高端消费+品质追求</td></tr>
+      <tr><td>熟龄悦己中年</td><td>4.78%</td><td>533.80</td><td>成熟人群自我提升</td></tr>
+    </table>
+  </div>
+
+</div>
+<!-- ========== Tab 2: 用户路径分析 ========== -->
+<div class="tab-content" id="tab2">
+
+  <div class="card">
+    <div class="card-title">整体路径结论</div>
+    <div class="conclusion-box">
+      决策周期超长（<strong>48.73% 的用户超过 90 天</strong>），属于重决策品类。用户在小语种行业内容生态中平均阅读 38 次笔记、搜索 7 次，但品牌内容触达严重不足——本品牌平均阅读仅 3 次，UGC 和蒲公英内容完全缺位。阅读场域以搜索流（27%）和视频内流（32%）为主，但品牌在视频场域的触达几乎为零（本品牌 4.21% vs 小语种行业 32.43%）。本品牌阅读占比仅 3.85%，竞品内容占 40.5%，品牌内容在用户决策链路中严重隐身。核心启示：品牌需要大幅补齐视频内容、UGC 种草和蒲公英达人合作，同时卡位品类搜索词。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">决策周期分布</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">48.73% 的用户决策周期超过 90 天，且这部分用户贡献了 62.27% 的覆盖金额——长决策周期用户是金额贡献的主力，近半数人在成交前 3 个月以上就开始接触小语种内容。相比之下，1-7 天快速决策的用户占 16.67% 但仅贡献 8.04% 金额，人均金额偏低。整体来看，这是超长决策、高客单品类，需要长周期持续触达机制，尤其要重点持续触达 90 天以上决策用户。</p>
+    <table>
+      <tr><th>决策周期</th><th>分析人数</th><th>人数占比</th><th>覆盖金额（元）</th><th>金额占比</th><th>解读</th></tr>
+      <tr><td>1-7 天</td><td>387</td><td>16.67%</td><td>503.8 万</td><td>8.04%</td><td>快速决策，已有明确需求</td></tr>
+      <tr><td>8-14 天</td><td>123</td><td>5.30%</td><td>234.7 万</td><td>3.75%</td><td>常规决策</td></tr>
+      <tr><td>15-30 天</td><td>181</td><td>7.80%</td><td>353.7 万</td><td>5.65%</td><td>常规+比价</td></tr>
+      <tr><td>31-60 天</td><td>265</td><td>11.42%</td><td>640.4 万</td><td>10.23%</td><td>较长决策，多品牌对比</td></tr>
+      <tr><td>61-90 天</td><td>234</td><td>10.08%</td><td>630.4 万</td><td>10.07%</td><td>长决策</td></tr>
+      <tr class="highlight-row"><td>＞90 天</td><td>1,131</td><td>48.73%</td><td>3,899.4 万</td><td>62.27%</td><td>超长决策，需长周期持续触达</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">行为频次</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">用户在小语种行业内容生态中平均阅读 38 次笔记，但品牌内容只有 3 次（本品牌），品牌内容触达严重不足。UGC 和蒲公英内容在本品牌口径下为 0，说明品牌完全缺失 UGC 种草和达人合作。</p>
+    <table>
+      <tr><th>品牌行为</th><th>本品牌频次</th><th>小语种行业频次</th><th>差值倍数</th><th>解读</th></tr>
+      <tr class="highlight-row"><td>平均阅读</td><td>3.06 次</td><td>38.29 次</td><td>12.5x</td><td>品牌内容触达严重不足</td></tr>
+      <tr><td>├─ 企业号</td><td>2.94 次</td><td>30.54 次</td><td>10.4x</td><td>竞品企业号内容大量触达</td></tr>
+      <tr><td>├─ KOS</td><td>0.12 次</td><td>1.60 次</td><td>13.3x</td><td>KOS 内容触达不足</td></tr>
+      <tr><td>├─ 蒲公英</td><td>0.00 次</td><td>0.91 次</td><td>—</td><td>达人内容完全缺位</td></tr>
+      <tr><td>└─ UGC</td><td>0.00 次</td><td>5.23 次</td><td>—</td><td>素人真实内容完全缺位</td></tr>
+      <tr class="highlight-row"><td>平均搜索</td><td>1.25 次</td><td>6.95 次</td><td>5.6x</td><td>品牌搜索承接不足</td></tr>
+      <tr><td>├─ 精搜</td><td>0.00 次</td><td>0.00 次</td><td>—</td><td>无品牌词主动搜索</td></tr>
+      <tr><td>└─ 泛搜</td><td>1.25 次</td><td>6.95 次</td><td>5.6x</td><td>用户主要泛搜品类词</td></tr>
+      <tr><td>平均互动</td><td>0.24 次</td><td>2.68 次</td><td>11.2x</td><td>互动不足</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">阅读场域</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">用户实际行为以搜索流（32.34% 首次阅读）和信息流（36.10% 首次）为主，视频内流占 22.74%。品牌内容触达以搜索流为主（本品牌 50.15%），视频内流严重不足（本品牌 4.21% vs 小语种行业 32.43%），是最大的内容形态缺口。</p>
+    <table>
+      <tr><th>场域</th><th>本品牌阅读占比</th><th>本品牌首次</th><th>本品牌末次</th><th>行业阅读占比</th><th>行业首次</th><th>行业末次</th></tr>
+      <tr class="highlight-row"><td>搜索流</td><td>50.15%</td><td>53.45%</td><td>50.09%</td><td>26.92%</td><td>32.34%</td><td>32.05%</td></tr>
+      <tr><td>信息流</td><td>34.43%</td><td>33.35%</td><td>31.87%</td><td>30.31%</td><td>36.10%</td><td>33.64%</td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>视频内流</td><td>4.21%</td><td>3.45%</td><td>5.48%</td><td>32.43%</td><td>22.74%</td><td>20.90%</td></tr>
+      <tr><td>其他</td><td>11.21%</td><td>9.74%</td><td>12.55%</td><td>10.34%</td><td>8.82%</td><td>13.40%</td></tr>
+    </table>
+    <div class="insight-box">
+      <div class="insight-title">⚠️ 最大缺口</div>
+      视频内流：本品牌 4.21% vs 小语种行业 32.43%，差 8 倍——用户在视频场域大量消费竞品内容，但品牌几乎没有视频内容布局。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">阅读品牌数量分布</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">34.62% 的用户接触了 10+ 竞品品牌，41.92% 接触了 10+ 竞品 SPU。竞争激烈，用户在决策前做了大量品牌对比。</p>
+    <table>
+      <tr><th>竞品品牌数</th><th>用户数</th><th>占比</th></tr>
+      <tr class="highlight-row"><td>10+</td><td>774</td><td>34.62%</td></tr>
+      <tr><td>5</td><td>174</td><td>7.78%</td></tr>
+      <tr><td>4</td><td>178</td><td>7.96%</td></tr>
+      <tr><td>3</td><td>176</td><td>7.87%</td></tr>
+      <tr><td>2</td><td>186</td><td>8.32%</td></tr>
+      <tr><td>1</td><td>79</td><td>3.53%</td></tr>
+    </table>
+    <table style="margin-top:16px;">
+      <tr><th>类型</th><th>占比</th><th>明细</th></tr>
+      <tr><td>本品（新东方）</td><td style="color:var(--primary);font-weight:700;">3.85%</td><td>—</td></tr>
+      <tr class="highlight-row"><td>竞品</td><td style="color:#E67E22;font-weight:700;">40.50%</td><td>向晚多水木(26) · 莱茵春天(12) · 欧那小语种(8) · 启德留学(6) · 外研社(6) · 新航道(5) · 艾瑞教育(3) · 多邻国(2) · 羊驼教育(1) · 友达日语(1) · Phönix德语(1)</td></tr>
+      <tr><td>其他（泛行业）</td><td>55.65%</td><td>—</td></tr>
+    </table>
+    <p style="margin-top:8px;font-size:13px;color:var(--text-secondary);">注：竞品品牌明细基于三位成交用户（rank 33/50/100）的 657 条阅读记录提取，括号内为阅读次数。德语赛道竞争最激烈——向晚多水木、莱茵春天、Phönix德语均为德语垂类品牌，多语种赛道以欧那为主，留学中介赛道以启德、新航道为主。</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">搜索词分析</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">品牌词搜索排名第一（"新东方日语"68 次），"新东方日语网课靠谱吗"38 次是重要口碑验证需求，但品牌侧 UGC/蒲公英内容缺位，口碑验证需求未满足。</p>
+    <table>
+      <tr><th>排名</th><th>搜索词</th><th>次数</th><th>词性</th></tr>
+      <tr class="highlight-row"><td>1</td><td>新东方日语</td><td>68</td><td><span class="badge badge-red">品牌词</span></td></tr>
+      <tr><td>2</td><td>日语网课</td><td>66</td><td><span class="badge badge-blue">课程词</span></td></tr>
+      <tr class="highlight-row"><td>3</td><td>新东方法语</td><td>45</td><td><span class="badge badge-red">品牌词</span></td></tr>
+      <tr><td>4</td><td>西班牙语</td><td>42</td><td><span class="badge badge-gray">品类词</span></td></tr>
+      <tr><td>5</td><td>日语</td><td>42</td><td><span class="badge badge-gray">品类词</span></td></tr>
+      <tr><td>6</td><td>法语</td><td>42</td><td><span class="badge badge-gray">品类词</span></td></tr>
+      <tr class="highlight-row"><td>7</td><td>新东方小语种</td><td>41</td><td><span class="badge badge-red">品牌词</span></td></tr>
+      <tr><td>8</td><td>新东方日语网课靠谱吗</td><td>38</td><td><span class="badge badge-orange">口碑词</span></td></tr>
+      <tr><td>9</td><td>法语网课</td><td>35</td><td><span class="badge badge-blue">课程词</span></td></tr>
+      <tr><td>10</td><td>德语</td><td>35</td><td><span class="badge badge-gray">品类词</span></td></tr>
+    </table>
+
+    <div class="insight-box" style="border-left-color:#FF9800;">
+      <div class="insight-title" style="color:#E65100;">⚠️ 西班牙语：搜索需求旺盛，但「新东方 × 西语」的品牌认知未建立</div>
+      <p style="margin-bottom:8px;">上表 TOP10 里有一处结构性差异值得单独看：日语和法语都是<strong>品牌词排在品类词前面</strong>（"新东方日语"68 次 &gt; "日语网课"66 次 &gt; "日语"42 次；"新东方法语"45 次 &gt; "法语网课"35 次），说明成交用户找这两个语种时会直接想到新东方。而<strong>西班牙语只以品类词形态出现（42 次，排名第 4），TOP10 里没有任何「新东方 + 西语」品牌词</strong>——西语的搜索热度已经和日语、法语持平（同为 42 次），品牌认知却明显落后一档。</p>
+      <p style="margin-bottom:8px;">把 2,321 位成交用户的全部 1,325 个搜索词按语种拆开算，差距更清楚：</p>
+      <table style="margin-bottom:12px;">
+        <thead><tr><th>语种</th><th style="text-align:right;">搜索词数</th><th style="text-align:right;">总搜索次数</th><th style="text-align:right;">品牌词次数</th><th style="text-align:right;">品牌词占比</th></tr></thead>
+        <tbody>
+        <tr><td><strong>日语</strong></td><td style="text-align:right;">326</td><td style="text-align:right;">479</td><td style="text-align:right;">121</td><td style="text-align:right;color:#00A67E;font-weight:600;">25.3%</td></tr>
+        <tr><td><strong>韩语</strong></td><td style="text-align:right;">114</td><td style="text-align:right;">143</td><td style="text-align:right;">36</td><td style="text-align:right;color:#00A67E;font-weight:600;">25.2%</td></tr>
+        <tr><td><strong>法语</strong></td><td style="text-align:right;">248</td><td style="text-align:right;">340</td><td style="text-align:right;">80</td><td style="text-align:right;color:#00A67E;font-weight:600;">23.5%</td></tr>
+        <tr class="highlight-row" style="background:#FFF3E0;"><td><strong>西班牙语</strong></td><td style="text-align:right;">206</td><td style="text-align:right;">272</td><td style="text-align:right;">40</td><td style="text-align:right;color:#E65100;font-weight:700;">14.7%</td></tr>
+        <tr><td>德语</td><td style="text-align:right;">104</td><td style="text-align:right;">120</td><td style="text-align:right;">18</td><td style="text-align:right;color:#E65100;font-weight:600;">15.0%</td></tr>
+        <tr><td>俄语</td><td style="text-align:right;">88</td><td style="text-align:right;">98</td><td style="text-align:right;">8</td><td style="text-align:right;color:#999;">8.2%</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-bottom:8px;">西语搜索总量 272 次排第 3（仅次日语 479、法语 340），需求规模不小，但<strong>品牌词只占 14.7%，比日语、韩语、法语低 9-11 个百分点</strong>。西语用户搜的高频词全是品类词——"西班牙语"11 次、"西班牙语零基础自学"8 次、"西班牙语学习"7 次、"西语"7 次、"西班牙语线上课程"6 次，而排名最高的西语品牌词"新东方西班牙语网课怎么样"只有 3 次。同一批已成交用户，找日语时会搜"新东方日语"（29 次）、"新东方日语网课靠谱吗"（24 次），找西语时却主要在搜品类词。</p>
+      <p style="margin-bottom:0;">西语品牌词并非完全没有——共有 34 个「新东方 × 西语」长尾词，但极度分散（"新东方西语课程价格""新东方西语录播课""新东方西班牙语小班课""新东方599西语课怎么样"等，绝大多数只被搜 1 次），且<strong>大量集中在价格与口碑咨询</strong>（费用/价格/多少钱/怎么样类占多数）。这说明用户已有报班意愿、也知道新东方有西语课，但只在决策末期才想到验证品牌——品牌没有在<strong>需求萌发阶段</strong>进入心智。<strong>动作</strong>：① 西语内容里强化"新东方西语"的品牌与师资露出，把品类流量沉淀成品牌认知；② 优先补齐"新东方西语网课怎么样/靠谱吗/多少钱"这类口碑与价格词的内容承接（对标日语已跑通的"新东方日语网课靠谱吗"38 次量级）；③ 西语可作为品牌口碑词卡位的首个试点语种——需求已在，认知待补。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">内容关键词分析</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">"老师"219 次排名第一，名师效应在小语种决策中很重要。"少儿""儿童""孩子"合计 174 次，少儿语种启蒙是明确需求。"硕士""留学生""18岁以上"合计 177 次，成人留学/考研需求同样旺盛。</p>
+    <table>
+      <tr><th>排名</th><th>关键词</th><th>次数</th><th>受众画像</th></tr>
+      <tr class="highlight-row"><td>1</td><td>老师</td><td>219</td><td>名师效应，关注老师角色</td></tr>
+      <tr><td>2</td><td>学生</td><td>128</td><td>学习者视角内容</td></tr>
+      <tr><td>3</td><td>同学</td><td>120</td><td>同伴学习场景</td></tr>
+      <tr class="highlight-row"><td>4</td><td>少儿</td><td>84</td><td>少儿语种启蒙需求</td></tr>
+      <tr><td>5</td><td>儿童</td><td>60</td><td>儿童语种启蒙</td></tr>
+      <tr><td>6</td><td>硕士</td><td>52</td><td>硕士留学/考研</td></tr>
+      <tr><td>7</td><td>18岁以上</td><td>48</td><td>成人学习</td></tr>
+      <tr><td>8</td><td>留学生</td><td>47</td><td>留学场景</td></tr>
+      <tr><td>9</td><td>学员</td><td>43</td><td>学员体验</td></tr>
+      <tr><td>10</td><td>初学者</td><td>40</td><td>零基础入门</td></tr>
+    </table>
+  </div>
+
+  
+
+  <!-- 单用户路径分析 -->
+  <div class="card">
+    <div class="card-title">单用户路径分析</div>
+    <p style="margin-bottom:20px;color:var(--text-secondary);">选取三位不同需求场景的成交用户，还原完整决策路径，附各阶段阅读的典型笔记链接。数据来源为灵犀报告「单用户分析」，筛选条件：决策笔记范围＝SPU所在行业笔记、商业类目＝小语种、决策周期＝全部、阅读时间不限。「笔记阅读次数」含重复阅读，「篇数」为去重笔记数，「搜索次数」为用户主动发起搜索的次数。</p>
+
+    <!-- 用户 A -->
+    <div class="user-card">
+      <div class="user-card-header">
+        <h3>用户 A：德国留学型 —— 为留学考德语，目标歌德/德福证书 <span class="tag">rank=50</span></h3>
+        <p style="font-size:14px;opacity:0.9;margin-top:4px;">高阅读榜 rank 50（用户ID 639e5c80…7983）｜ 笔记阅读 231 次 / 216 篇 ｜ 搜索 38 次 ｜ 阅读品牌 29 个 / SPU 27 个 ｜ 决策周期 177 天 ｜ 本品牌占比 6.6%</p>
+      </div>
+      <div class="user-card-body">
+        <div class="insight-box">
+          <div class="insight-title">画像推测</div>
+          从搜索行为看，这位用户是<strong>为德国留学做语言准备的备考者</strong>。留学意图证据密集：8-19 刷到"真心建议出国留学的人，要打破信息差"，8-21 搜"德国语言班费用"（德国大学语言班是留学必经环节）触达"高考完一年脱产学习德语rmb花销 telcC1已过"，11-07 搜"暗黑"触达"办德国签证说喜欢《暗黑》秒过"，11-19 至 26-01-14 持续刷到"慕尼黑大学留学生地陪""德留学｜来看看我在德国的宜居小窝""在德国大学校园里""德留学｜第一个月🔚"等在德留学生日常。语种从头到尾只有德语，没有跨语种犹豫。早期搜"德语学到b2要多久""德国语言班费用""歌德a2考试费用"，起点就是明确的证书目标（歌德 A2/B2、德福）和预算摸底。中期密集搜索"新求精"系列教材（11 次）和"nicosweg"（4 次）——德语学习者公认的主流教材和自学资源，说明 ta 一度尝试过自学路线。11 月起搜"德国打工""女生德国""德国电视剧"，透露出学德语背后的真实动机偏向<strong>德国就业/生活</strong>而非单纯留学。临门期集中比价莱茵春天、欧那、新航道、新东方四家机构，最终成交。
+        </div>
+
+        <div class="stage-block stage-early">
+          <div class="stage-title">🌱 早期（2025-08-10 ~ 2025-10-28，80 天）——"考级要多久、要花多少钱"</div>
+          <p style="margin-bottom:8px;font-size:14px;">起点即带着明确考级目标：8-21 一天搜了"德语学到b2要多久""德国语言班费用""歌德a2考试费用"三个词，全是周期和费用问题。10 月转向机构和资源摸底，搜"德语考级机构""优优德语""东莞德语""歌德费用"，触达启德留学、OIMG 等机构内容。<strong>本品牌在这个阶段有 4 次触达</strong>，其中 9-15 和 9-25 两次是信息流被动刷到的泛趣味内容（非课程内容）。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68c55499000000001d00ac9a" target="_blank">你的德语名是什么？</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·歌德费用</span><a class="note-link" href="https://www.xiaohongshu.com/explore/66fe734b000000001a0203c9" target="_blank">一文讲清德语🇩🇪德福和歌德区别❗</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语学习</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68b662fb000000001c01024c" target="_blank">📍深圳2大校区 | 德语线下课开班倒计时！</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·德语b1</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67e6543b000000001c037dde" target="_blank">6🈷️德语班课表！北上广深全国15城可冲（启德留学）</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·东莞德语</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67fca8cc000000001c029fee" target="_blank">敢不敢挑战下德语B2⁉线上一对一收学生（OIMG）</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-mid">
+          <div class="stage-title">🔍 中期（2025-10-21 ~ 2025-12-23，64 天）——"能不能自学？德国到底怎么样"</div>
+          <p style="margin-bottom:8px;font-size:14px;">中期转向<strong>自学资源囤积</strong>：10-21 至 10-27 密集搜索"新求精"系列共 11 次，10-28 搜"nicosweg"4 次，全部指向教材电子版和自学建议，触达的几乎都是无品牌的资源型笔记，说明 ta 在评估"自学能不能行"。11-06 起搜索词漂移到德国生活场景——"德国电视剧""暗黑""德国打工""女生德国"，触达艾瑞教育的双元制就业内容。<strong>本品牌整个中期只出现 1 次</strong>：11-18 搜"德语原著"触达"学德语不同阶段看什么类型小说？"。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语原著</span><a class="note-link" href="https://www.xiaohongshu.com/explore/677266c5000000000900e0f7" target="_blank">学德语不同阶段看什么类型小说？</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·新求精德语课程</span><a class="note-link" href="https://www.xiaohongshu.com/explore/686b3c0d000000001c0351ae" target="_blank">《新求精德语强化教程 中级B2》重磅来袭！</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·nicosweg</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6896b74000000000250200f3" target="_blank">德语A1-B1备考 Nico课本+词汇+习题</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·女生德国</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6888652a0000000005004430" target="_blank">女生去德国工作超友好！双元制帮你实现！（艾瑞教育）</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-late">
+          <div class="stage-title">🎯 临门（2026-01-19 ~ 2026-02-03，16 天）——"四家机构比价"</div>
+          <p style="margin-bottom:8px;font-size:14px;">临门期从自学转向报班，进入<strong>机构横向比价</strong>：1-21 一天内搜"东莞德语""莱茵春天德语""德语培训机构""德语b1"，同时看到新东方、莱茵春天、欧那、新航道多家内容。2-03 成交当天先搜"莱茵春天德语"看了 4 篇莱茵内容、搜"歌德德语"看向晚多水木和欧那，<strong>随后在「其他」场域一次性阅读 6 篇新东方笔记</strong>（德语网课开班表、小语种留学校区汇总、课程汇总、欧亚教育语培留学一站式规划、日语线上课班型合集等）后成交。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·东莞德语</span><a class="note-link" href="https://www.xiaohongshu.com/explore/693e2376000000001e0029eb" target="_blank">新东方线上德语寒假班来啦！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">其他</span><a class="note-link" href="https://www.xiaohongshu.com/explore/684be48f000000002100a3e1" target="_blank">新东方欧亚教育｜语培留学一站式规划🌟</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">其他</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68a427e5000000001d0173fb" target="_blank">2025新东方小语种·留学校区汇总🔥</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">其他</span><a class="note-link" href="https://www.xiaohongshu.com/explore/688b7345000000002500f13b" target="_blank">一文了解2025新东方小语种课程🔥</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·莱茵春天德语</span><a class="note-link" href="https://www.xiaohongshu.com/explore/671b6c75000000001b011dc1" target="_blank">A1学不好真的很费钱！（莱茵春天）</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·德语培训机构</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6901790000000000030103d1" target="_blank">2026年德语夏季班招生✨3个月突破一个级别（欧那）</a></li>
+          </ul>
+        </div>
+
+        <div class="insight-box">
+          <div class="insight-title">品牌洞察</div>
+          <p style="margin-bottom:8px;">本品牌赢在<strong>成交当天的"课程体系集中承接"</strong>——2-03 那 6 篇笔记覆盖德语网课开班表、小语种课程汇总、留学校区汇总、语培留学一站式规划，让用户一次性看清产品全貌。但代价是决策周期被拖到 177 天，全程 15 篇本品牌笔记有 8 篇集中在成交当天，前 170 天只触达 7 次。</p>
+          <p style="margin-bottom:0;">两个明确缺口：<strong>① 自学教材场景完全缺位</strong>——中期用户搜"新求精"11 次、"nicosweg"4 次，触达的全是无品牌资源分享笔记，新东方一次都没出现。这是抢占心智的黄金窗口（用户正在纠结自学还是报班），品牌应布局"新求精教材怎么配课""自学到 A2 之后为什么要报班"这类内容。<strong>② 就业动机内容缺位</strong>——用户 11 月起搜"德国打工""女生德国"，触达的是艾瑞教育的双元制就业内容，新东方在"德语+德国就业"这条线上没有任何承接。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 用户 B -->
+    <div class="user-card">
+      <div class="user-card-header" style="background:linear-gradient(135deg,#5252FF 0%,#7B61FF 100%);">
+        <h3>用户 B：熟龄出国双元制型 —— 40+ 女性，走德国双元制职业移民路径 <span class="tag">rank=100</span></h3>
+        <p style="font-size:14px;opacity:0.9;margin-top:4px;">高阅读榜 rank 100（用户ID 5a5d16ba…5b86）｜ 笔记阅读 150 次 / 141 篇 ｜ 搜索 19 次 ｜ 阅读品牌 21 个 / SPU 21 个 ｜ 决策周期 205 天 ｜ 本品牌占比 10.1%</p>
+      </div>
+      <div class="user-card-body">
+        <div class="insight-box" style="border-left-color:#5252FF;">
+          <div class="insight-title" style="color:#5252FF;">画像推测</div>
+          这位用户是<strong>走德国双元制职业移民路径的熟龄女性</strong>，双元制是贯穿全程的核心主线：9-20 搜"ZDF 德国人如何自嘲劳动力短缺"（2 次）了解德国缺工背景，10-29 搜"德国双元制失败案例"（2 次）触达"德国双元制残酷真相，米夏老师3条避坑建议""原来90%的学生根本就申请不了双元制"，10-30 至 11-07 连续刷到"德国双元制申请，经常碰到的一些问题""申请德国双元制，能骂醒一个是一个""女生选德国双元制=开挂！这些黄金专业太香"，26-01-07 刷到"劝退警告：德国的紧缺职业可能是低薪陷阱"，2-08 还在看"双元制护理学生德国暖气自制菠萝干"。<strong>年龄证据</strong>：1-07 搜"44岁女能找什么工作"触达"德国双元制女性热门职业Top10"——40+ 女性通过双元制在德国转换职业路径，与整体人群画像（19-25 岁年轻女性为主）完全不同，属于长尾但决心和付费能力都更强的高价值人群。11-28 单日爆发式搜索 4 个课程词共 27 次触达，是决策的关键转折点。
+        </div>
+
+        <div class="stage-block stage-early">
+          <div class="stage-title">🌱 早期（2025-08-12 ~ 2025-11-04，85 天）——"德国到底怎么样？值不值得去"</div>
+          <p style="margin-bottom:8px;font-size:14px;">早期<strong>完全没有搜课程词</strong>，搜的全是德国社会与制度话题：9-20 搜"ZDF 德国人如何自嘲劳动力短缺"（2 次）、9-26 搜"德语笑话"、10-29 搜"德国双元制失败案例"（2 次）、11-04 搜"在德国可以做什么"。这个阶段用户在判断"去德国这条路可行吗"，还没进入学习决策。本品牌在此阶段完全缺席。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·ZDF德国劳动力短缺</span><a class="note-link" href="https://www.xiaohongshu.com/explore/673b50d7000000000800409c" target="_blank">🇩🇪｜德语新闻速读-德国总在缺人</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德国双元制失败案例</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68efb3100000000007030489" target="_blank">德国双元制残酷真相，米夏老师3条避坑建议</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德国双元制失败案例</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68a58d81000000001b022ced" target="_blank">原来90%的学生根本就申请不了双元制</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·在德国可以做什么</span><a class="note-link" href="https://www.xiaohongshu.com/explore/66911d050000000005004403" target="_blank">学外语秘笈就俩字</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-mid">
+          <div class="stage-title">🔍 中期（2025-11-28 单日爆发）——"德语网课怎么选"</div>
+          <p style="margin-bottom:8px;font-size:14px;"><strong>11-28 一天内集中搜索 4 个课程词</strong>——"德语网课"（14 次）、"德语学习教材推荐"（7 次）、"德语专业教程"（4 次）、"德语学习教程"（2 次），单日触达 27 篇笔记。<strong>本品牌在这一天首次出现且密集触达 7 篇</strong>（新东方德语线上一对一 ×3、德语网课学德语没那么难/没那么痛苦、德语B2线上直播课 ×2、周末4小时把德语网课上成仪式感），全部通过搜索"德语网课"这一个词进入。同时也大量触达"10年德语老师在线收徒"这类个人博主收徒内容和"张雪峰说二本+普通家庭考德语没必要"这类质疑性内容。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/656db2e10000000038027092" target="_blank">新东方德语线上一对一🔥这家网课真的香！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6904892d0000000004020609" target="_blank">新东方德语网课🔥学德语真的没有那么难</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6895df690000000023029aec" target="_blank">新东方德语线上一对一🔥省心省力学德语！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68f9f236000000000703a55d" target="_blank">德语B2线上直播课开班🔥3个月无痛到B2</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68be5245000000001c00862d" target="_blank">周末4小时，把德语网课上成生活仪式感✨</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德语网课</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68f0beaf000000000700d419" target="_blank">🇩🇪10年德语老师在线收徒，手把手教德语</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德语学习教材推荐</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67bd96b60000000009038b72" target="_blank">怪不得张雪峰说二本+普通家庭考德语没必要.</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-late">
+          <div class="stage-title">🎯 临门（2026-01-01 ~ 2026-03-05，64 天）——"价格和线下体验"</div>
+          <p style="margin-bottom:8px;font-size:14px;">临门期<strong>搜索量骤减、转为信息流被动接收</strong>：1-01 搜"Luna德语名字"意外触达"寒假冲德语B2｜新东方德语一对一多少钱"（价格信息）；1-30 搜"德国如何学德语"7 次做最后的方法论确认，触达欧那、OIMG、多邻国等竞品；此后 1-30、3-01、3-05 三次通过信息流被动看到"北京新东方德语课来了""我不允许还有人不知道北京这家德语机构""新东方德语1v1到底多少钱"，3-05 搜"德语学习"触达"体验在北京新东方上德语课的一天"。<strong>价格和线下体验类内容是临门期的核心触点。</strong></p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·Luna德语名字</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6916f6a90000000007031149" target="_blank">寒假冲德语B2｜新东方德语一对一多少钱</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/66acbc4500000000270109a8" target="_blank">北京新东方德语课来了~</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67f6426a000000001c02a1bb" target="_blank">我不允许还有人不知道北京这家德语机构！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">搜索·德语学习</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67aeffcc000000001800779a" target="_blank">体验在📍北京新东方上德语课的一天！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67b855d50000000029033e00" target="_blank">新东方德语1v1到底多少钱？</a></li>
+            <li><span class="note-tag note-tag-comp">竞品</span><span class="note-tag note-tag-field">搜索·德国如何学德语</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68f86c460000000005013d24" target="_blank">在德国八年，我总结出最有效的学德语方式✍️（欧那）</a></li>
+          </ul>
+        </div>
+
+        <div class="insight-box" style="border-left-color:#5252FF;">
+          <div class="insight-title" style="color:#5252FF;">品牌洞察</div>
+          <p style="margin-bottom:8px;">本品牌赢在<strong>"德语网课"这个核心词的搜索承接密度</strong>——11-28 用户搜这一个词，一次性看到 7 篇新东方笔记（占当日品牌触达全部），品牌在这个词上的内容储备明显起了作用。临门期靠信息流的价格类内容（1v1 多少钱、寒假班价格）和线下体验类内容（上德语课的一天、北京德语课）完成收口，16 篇本品牌笔记分布在 6 个时间点，节奏比用户 A 健康。</p>
+          <p style="margin-bottom:0;">两个缺口：<strong>① 早期德国社会话题完全缺位</strong>——用户前 85 天搜的是"德国双元制失败案例""在德国可以做什么"，触达的全是无品牌内容，新东方零露出。这类内容是意图形成的最上游，品牌完全没参与。<strong>② 大龄转职人群内容缺位</strong>——用户搜"44岁女能找什么工作"触达的是无品牌的双元制职业内容，新东方没有面向 35+ 转职人群的德语内容，而这类用户付费能力和决心通常更强。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 用户 C -->
+    <div class="user-card">
+      <div class="user-card-header" style="background:linear-gradient(135deg,#00A67E 0%,#00C896 100%);">
+        <h3>用户 C：国内德语求职型 —— 德语专业学生，目标国内德企就业 <span class="tag">rank=33</span></h3>
+        <p style="font-size:14px;opacity:0.9;margin-top:4px;">高阅读榜 rank 33 / 高搜索榜 rank 20 / 高互动榜 rank 21（用户ID 589f243e…3cab）｜ 笔记阅读 286 次 / 265 篇 ｜ 搜索 60 次 ｜ 阅读品牌 36 个 / SPU 35 个 ｜ 决策周期 273 天 ｜ 本品牌占比 7.1% ｜ <strong>0 次品牌搜索</strong></p>
+      </div>
+      <div class="user-card-body">
+        <div class="insight-box" style="border-left-color:#00A67E;">
+          <div class="insight-title" style="color:#00A67E;">画像推测</div>
+          这位用户是<strong>德语专业在读学生（或应届生），核心焦虑是"德语这个专业到底能不能找到工作"</strong>。判据很密集：搜"同济大学 德语 高起点""北京外国语大学保送报名""南开fas项目""2025小外录取名单""小外 转语种"——这是外语类院校保送/升学的圈内话题，只有体制内德语学习者才会搜；搜"二外德语的第一册的试卷""prima 德语练习册答案""A1德语prima1必考词汇""专门搜德语题答案的"——在应付课程考试；搜"德语A1考试题""德语A1入门考"说明还在初级阶段。<strong>最关键的是求职焦虑贯穿全程</strong>：搜"德语出路""张雪峰谈德语""德语就业""法语就业""德企大量进入中国"，触达"【2026德专业应届生，你们真的很难】""字节跳动全德语面试+赶飞机vlog""德语vlog｜上海德企人日常回归"。ta 的目标是<strong>留在国内进德企</strong>（不是出国），5-03 甚至搜"法语就业"在评估要不要转语种。
+        </div>
+
+        <div class="stage-block stage-early">
+          <div class="stage-title">🌱 早期（2025-08-10 ~ 2025-08-19，10 天）——"学德语这条路怎么走"</div>
+          <p style="margin-bottom:8px;font-size:14px;">起点就在做<strong>路径可行性调研</strong>：8-10 同一天搜"德国双元制本科 杜塞""德国双元制 酒店"（触达"34岁无限可能，我去德国酒店工作了"），8-12 搜"同济大学 德语 高起点"，8-19 触达"外语保送择校，信息差最致命"。这个阶段 ta 在同时评估出国和国内升学两条路。本品牌完全缺席。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德国双元制本科 杜塞</span><a class="note-link" href="https://www.xiaohongshu.com/explore/67fe07d1000000001b024c0f" target="_blank">二本考研失败，爸妈花15w送我去德国留学</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德国双元制 酒店</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6826e010000000001101d6b5" target="_blank">34岁无限可能，我去德国酒店工作了！</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·同济大学 德语 高起点</span><a class="note-link" href="https://www.xiaohongshu.com/explore/679f9c6c0000000028034d5e" target="_blank">从高考选错专业，到留🇩🇪重开的十年 1️⃣</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/689ed953000000001b036991" target="_blank">学习西班牙语未来就业分析</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/68a2c0f5000000001c035da2" target="_blank">外语保送择校，信息差最致命</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-mid">
+          <div class="stage-title">🔍 中期（2025-11-11 ~ 2026-01-11，62 天）——"德语值不值得，怎么升学"</div>
+          <p style="margin-bottom:8px;font-size:14px;">中期聚焦<strong>专业价值判断和升学路径</strong>：11-11 刷到"张雪峰说：任何技能➕西语＝绝杀"，12-19 搜"德企大量进入中国"触达"外贸人选这10小语种，职场直接开挂"，12-29 看上外德语考研真题。1-10 至 1-11 密集搜"北京外国语大学保送报名""南开fas项目"，明确在走保送/考研路线。1-09 通过视频内流看到"德国加班Vlog丨如何在国内找到德国的工作"——<strong>国内就业意向首次浮现</strong>。本品牌仍然缺席。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69022f9d0000000004021bf6" target="_blank">张雪峰说：任何技能➕西语＝绝杀</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德企大量进入中国</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6932ae48000000001e013c25" target="_blank">外贸人选这 10 小语种，职场直接开挂💼</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/694a262e000000001e0011ed" target="_blank">抢先看！2026上外德语语言文学考研初试真题</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">视频内流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6792cba200000000280358d8" target="_blank">德国加班Vlog丨如何在国内找到德国的工作</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·北京外国语大学保送报名</span><a class="note-link" href="https://www.xiaohongshu.com/explore/693a3503000000001f00b55f" target="_blank">实锤！！1月1-2日，保送生抓紧最后冲刺！</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·南开fas项目</span><a class="note-link" href="https://www.xiaohongshu.com/explore/66e50851000000001e01bca2" target="_blank">采访100个小语种保送生｜南开西语转战法硕</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-mid" style="border-left-color:#FF9800;">
+          <div class="stage-title" style="color:#E65100;">⚠️ 求职焦虑期（2026-01-12 ~ 2026-05-03）——"德语专业到底有没有出路"</div>
+          <p style="margin-bottom:8px;font-size:14px;">这是这位用户最鲜明的阶段，也是<strong>品牌最应该介入却完全缺位的阶段</strong>。1-12 一天内搜"德语出路"（触达"【2026德专业应届生，你们真的很难】"）和"张雪峰谈德语"（触达"张雪峰都说：德语现在很小众，未来很吃香"）——同一天看到一负一正两种截然相反的结论。3-12 搜"德语就业"2 次，触达<strong>"字节跳动全德语面试+赶飞机vlog✈️"</strong>和"学德语的就业方向有哪些，你知道吗"——这是明确的"德语能进什么公司"的验证行为。5-03 搜"法语就业"触达"EE大变后，法语是不是白学了？"，同日信息流刷到"德语vlog｜上海德企人日常回归"。5-04 又一次搜"德语"再看了一遍那篇字节跳动德语面试 vlog。<strong>整个求职焦虑期，新东方在"德语就业"这条线上零内容承接，用户看到的全是无品牌的个人分享。</strong></p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德语出路</span><a class="note-link" href="https://www.xiaohongshu.com/explore/695baf11000000001a031680" target="_blank">【2026德专业应届生，你们真的很难】</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·张雪峰谈德语</span><a class="note-link" href="https://www.xiaohongshu.com/explore/678a1f72000000001802ba9d" target="_blank">张雪峰都说：德语现在很小众，未来很吃香</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德语就业</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69091cd600000000050392d5" target="_blank">字节跳动全德语面试+赶飞机vlog✈️</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·德语就业</span><a class="note-link" href="https://www.xiaohongshu.com/explore/685e023a000000001202ebd0" target="_blank">学德语的就业方向有哪些，你知道吗</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69f429df000000001e00d4d4" target="_blank">德语vlog ｜ 上海德企人日常回归</a></li>
+            <li><span class="note-tag note-tag-comp">无品牌</span><span class="note-tag note-tag-field">搜索·法语就业</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69ea3c1b000000001f031001" target="_blank">EE大变后，法语是不是白学了？</a></li>
+          </ul>
+        </div>
+
+        <div class="stage-block stage-late">
+          <div class="stage-title">🎯 临门（2026-04-10 ~ 2026-05-09，30 天）——"报个班把德语学扎实"</div>
+          <p style="margin-bottom:8px;font-size:14px;">临门期<strong>20 篇本品牌笔记密集触达，全部来自信息流和视频内流被动推送，0 次主动搜索品牌</strong>。4-10 一天内刷到 6 篇（天津新东方小语种4月开班合集、北京新东方小语种线下课全指南、天津新东方德语1V1线下课值得报吗、周末在天津市中心报了个12人的德语课等），5-08 又刷到 8 篇（德语B2学习规划、别再盲目自学、小语种线上一对一、来天津新东方学日语等）。内容集中在<strong>天津/北京线下课</strong>和<strong>零基础到B2的学习规划</strong>——正好对应 ta"专业课学得吃力、想报班补基础"的需求。5-09 看完"零基础小白想6个月N2？入门首选新东方"后成交。</p>
+          <ul class="note-list">
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69ccd11c0000000022002e44" target="_blank">🔥天津新东方小语种4月开班合集</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6909f3300000000004010367" target="_blank">天津新东方德语1V1线下课，值得报吗？</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69aadbb7000000002603ede1" target="_blank">💡周末在天津市中心报了个12人的德语课</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">视频内流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/697b0f56000000000b012aa7" target="_blank">0基础冲B2！保姆级德语学习规划</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">信息流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/69e6d981000000002200cab6" target="_blank">听劝！8 月想学德语的千万别再盲目自学了！</a></li>
+            <li><span class="note-tag note-tag-brand">本品牌</span><span class="note-tag note-tag-field">视频内流</span><a class="note-link" href="https://www.xiaohongshu.com/explore/6981b264000000000b011184" target="_blank">零基础小白想6个月N2？入门首选新东方！</a></li>
+          </ul>
+        </div>
+
+        <div class="insight-box" style="border-left-color:#00A67E;">
+          <div class="insight-title" style="color:#00A67E;">品牌洞察</div>
+          <p style="margin-bottom:8px;">本品牌完全靠<strong>信息流与视频内流的被动截流</strong>拿下这个用户——20 篇品牌笔记全部是推送触达，用户从头到尾没搜过一次"新东方"。这证明推荐流投放对"无品牌偏好"的学生型用户有效，而且天津/北京线下课这类地域化内容 + 零基础学习规划内容的组合恰好击中了 ta 的真实需求。</p>
+          <p style="margin-bottom:0;">但代价是<strong>273 天的超长决策周期，且品牌在前 8 个月完全缺席</strong>。最大的缺口是<strong>"德语专业就业出路"这条内容线</strong>：用户在 1-12 至 5-04 反复搜"德语出路""德语就业""法语就业""张雪峰谈德语"，触达的全是无品牌的个人分享和焦虑型内容（"2026德专业应届生真的很难"），新东方一篇都没有。这类用户的核心焦虑不是"怎么学"而是"学了有没有用"——品牌应该布局"德语专业毕业进德企的真实路径""学员德企offer案例""德语+第二技能的职业组合"这类内容，把就业信心和课程销售挂钩。次要缺口是<strong>院校圈内话题缺位</strong>——用户搜"北外保送报名""南开fas项目""上外德语考研真题"这类高精准的体制内升学词，新东方在保送/考研赛道没有任何露出。</p>
+        </div>
+      </div>
+    </div>
+
+<div class="section-title" style="margin-top:32px;">三位用户对比小结</div>
+    <table>
+      <tr><th>维度</th><th>用户 A（rank=50）</th><th>用户 B（rank=100）</th><th>用户 C（rank=33）</th></tr>
+      <tr><td>学习语种</td><td>德语</td><td>德语</td><td>德语</td></tr>
+      <tr class="highlight-row"><td>真实需求</td><td><strong>德国留学</strong>：为留学考语言证书（歌德/德福），已在关注在德留学生活</td><td><strong>熟龄出国双元制</strong>：40+ 女性走德国双元制职业移民</td><td><strong>国内德语求职</strong>：德语专业学生，目标国内德企就业</td></tr>
+      <tr><td>决策周期</td><td>177 天</td><td>205 天</td><td>273 天</td></tr>
+      <tr><td>笔记阅读次数 / 篇数</td><td>231 次 / 216 篇</td><td>150 次 / 141 篇</td><td>286 次 / 265 篇</td></tr>
+      <tr><td>本品牌占比</td><td>6.6%</td><td>10.1%</td><td>7.1%</td></tr>
+      <tr><td>品牌搜索次数</td><td>0 次（品牌笔记均由品类词搜索触达）</td><td>0 次（品牌笔记由"德语网课"触达）</td><td>0 次</td></tr>
+      <tr><td>品牌首次出现</td><td>早期（2025-09-15 信息流）</td><td>中期（2025-11-28 搜索）</td><td>临门期（2026-04-10 信息流）</td></tr>
+      <tr><td>临门期行为</td><td>四家机构比价后，成交当天在「其他」场域一次看 6 篇品牌笔记</td><td>搜索骤减转信息流被动接收，价格与线下体验内容收口</td><td>信息流+视频内流被动触达 20 篇</td></tr>
+      <tr class="highlight-row"><td>成交驱动</td><td>课程体系全面性（成交当天集中承接）</td><td>核心词"德语网课"搜索承接密度 + 价格透明度</td><td>信息流/视频内流截流（0 次主动品牌搜索）</td></tr>
+    </table>
+    <div class="insight-box">
+      三位用户都是超长决策周期（177 / 205 / 273 天），学习语种都是德语，且<strong>三人全程 0 次主动搜索品牌词</strong>——所有本品牌笔记都是通过品类词搜索或推荐流被动触达的，这与行业整体数据一致（全路径品牌搜索行为仅占 1.66%）。三人都在早期和中期大量阅读无品牌的自学资源与竞品内容，品牌在品类探索期严重缺席。<br><br>但三人代表<strong>三种完全不同的典型画像</strong>：用户 A 是<strong>德国留学型</strong>（为留学考语言证书，已在关注在德留学生活），用户 B 是<strong>熟龄出国双元制型</strong>（40+ 女性走德国双元制职业移民），用户 C 是<strong>国内德语求职型</strong>（德语专业学生，目标国内德企就业，全程未考虑出国）。同样是学德语，三人的动机、年龄段、内容偏好完全不重叠。对应的成交驱动也完全不同——A 靠成交当天的课程体系集中承接，B 靠"德语网课"这个核心词的搜索承接密度加价格透明，C 靠信息流与视频内流的被动截流。<br><br>三人共同暴露的最大缺口是<strong>"自学转报班"这个决策窗口完全没有品牌内容</strong>：A 搜"新求精"11 次、"nicosweg"4 次，B 搜"德语学习教材推荐"7 次、"德语专业教程"4 次，触达的全是无品牌的教材资源笔记。用户正是在这个阶段纠结"能不能自学"，品牌零露出等于放弃了最有效的心智抢占时机。其次是<strong>就业/转职场景缺位</strong>——A 搜"德国打工""女生德国"，B 搜"44岁女能找什么工作"，C 搜"德语就业""法语就业"，三人都在这条线上触达竞品或无品牌内容。。品牌需要针对不同需求场景做差异化内容承接，尤其要补齐"求职场景"的内容缺口。
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== Tab 3: 供需分析 ========== -->
+<div class="tab-content" id="tab3">
+
+  <div class="card">
+    <div class="card-title">供需分析概览</div>
+    <div class="conclusion-box">
+      基于 2025-06-01 至 2026-05-31 期间投放数据，对 1600 条投放笔记和 1396 条有效搜索词进行多维度打标分析，找出内容缺口、高价值未覆盖和资源错配三类机会点。
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="value">1,600</div><div class="label">投放笔记数</div></div>
+      <div class="metric-card"><div class="value">797 万</div><div class="label">笔记总消耗</div></div>
+      <div class="metric-card"><div class="value">1,396</div><div class="label">有效搜索词数</div></div>
+      <div class="metric-card"><div class="value">29.6 万</div><div class="label">搜索词总消耗</div></div>
+    </div>
+  </div>
+
+  <!-- 笔记榜分析 -->
+  <div class="card">
+    <div class="card-title">笔记榜 · 国家/语种维度</div>
+    <p style="margin-bottom:10px;padding:11px 14px;background:#F5F7FA;border-radius:6px;font-size:13px;color:#666;line-height:1.7;">
+    <strong>打标与案例口径说明</strong>：以下四张榜单基于灵犀结案报告 232802 的笔记流转榜（1,400 条笔记，消耗合计 418.7 万），按<strong>笔记标题</strong>做关键词打标（不使用正文，避免品牌 hashtag 让所有笔记趋同）。<strong>流转率按「桶内流转人数汇总 ÷ 桶内触达人数汇总」计算</strong>（不对单篇流转率做平均），括号内「推/搜」分别为推荐场域与搜索场域的流转率；绿色 ≥0.28%、橙色 0.20%~0.28%。案例为该桶内消耗最高的笔记，可点击跳转小红书原文。<br>
+    榜单覆盖 1,400 条笔记；上方「供需分析概览」的总量数据为完整投放集（1,600 条笔记）口径。</p>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">法语笔记数最多（333 条）且流转率 0.29% 全场第一；德语流转率 0.28% 紧随其后，但消耗仅 15.9 万，是法语（49.7 万）的三分之一，存在明显资源错配。</p>
+    <table><thead><tr><th>国家/语种</th><th style="width:58px;text-align:right;">笔记数</th><th style="width:78px;text-align:right;">消耗</th><th style="width:56px;text-align:right;">消耗占比</th><th style="width:86px;text-align:right;">流转率</th><th style="min-width:230px;">消耗最高笔记案例</th></tr></thead><tbody><tr><td><strong>多语种/泛</strong></td><td style="text-align:right;">50</td><td style="text-align:right;">190.2 万</td><td style="text-align:right;">45.4%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.22%</span><br><span style="font-size:11px;color:#BBB;">推0.14%/搜0.18%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/65e80ebf000000000400090b?xsec_token=YBHws2j9fDW1PJGFk8LqCU2GAU3QPNrXwWyssr5RFuZXo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">小语种线上一对一推荐✅新东方网课高效学！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 79.1 万 ｜ 流转率 0.28%</span></td></tr><tr><td><strong>日本/日语</strong></td><td style="text-align:right;">313</td><td style="text-align:right;">66.1 万</td><td style="text-align:right;">15.8%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.15%</span><br><span style="font-size:11px;color:#BBB;">推0.12%/搜0.20%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685bd2590000000022031deb?xsec_token=YBbGrm-vAC8A0daDjutDT2bz780detjcag0P5KCkaBTZg=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">晚上7点准时上线📢日语小班直播课不掉队</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 22.6 万 ｜ 流转率 0.18%</span></td></tr><tr><td><strong>西班牙/西语</strong></td><td style="text-align:right;">266</td><td style="text-align:right;">49.9 万</td><td style="text-align:right;">11.9%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.26%</span><br><span style="font-size:11px;color:#BBB;">推0.19%/搜0.30%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67f8d59a000000001200f55e?xsec_token=YBkVgxLRFNPBHq2UGhUgKFgGL17y2BGUIDj35eRCuZ3b0=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">受够自学的苦了😭新东方西语网课超香的！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 8.1 万 ｜ 流转率 0.25%</span></td></tr><tr><td><strong>法国/法语</strong></td><td style="text-align:right;">333</td><td style="text-align:right;">49.7 万</td><td style="text-align:right;">11.9%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.29%</span><br><span style="font-size:11px;color:#BBB;">推0.25%/搜0.34%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67f8c3fb000000001201c5ec?xsec_token=YBkVgxLRFNPBHq2UGhUgKFgBIP4Rqb6-Tqr9DpixEcFBU=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">受够自学的苦了😭新东方法语网课超香的！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 9.7 万 ｜ 流转率 0.19%</span></td></tr><tr><td><strong>俄罗斯/俄语</strong></td><td style="text-align:right;">130</td><td style="text-align:right;">37.8 万</td><td style="text-align:right;">9.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.13%</span><br><span style="font-size:11px;color:#BBB;">推0.11%/搜0.17%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685f995b00000000120215d5?xsec_token=YBK58ex_CPGei5gVwcBlxGSWRNSWctCzd_Ce8QC108uIA=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">敢不敢挑战俄语B2⁉️线上老师一对一教</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 10.2 万 ｜ 流转率 0.12%</span></td></tr><tr><td><strong>德国/德语</strong></td><td style="text-align:right;">268</td><td style="text-align:right;">15.9 万</td><td style="text-align:right;">3.8%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.28%</span><br><span style="font-size:11px;color:#BBB;">推0.18%/搜0.56%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67ecfd820000000007037995?xsec_token=YBW9JrA4qLVdVx3lsQw4mqAFcytniV_0qvbvQGveYL-XE=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">总结了一个德语一年next level的学习法🤗</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 2.2 万 ｜ 流转率 0.15%</span></td></tr><tr><td><strong>韩国/韩语</strong></td><td style="text-align:right;">32</td><td style="text-align:right;">7.4 万</td><td style="text-align:right;">1.8%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.24%</span><br><span style="font-size:11px;color:#BBB;">推0.34%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/689330520000000022023f13?xsec_token=YBUI-iK_IMg9LXwZ7d3BbHVy1EM1Dj7kPRX0kpWhPObU0=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">新东方韩语网课一览表🔥0-T6全阶段覆盖</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 2.0 万 ｜ 流转率 0.23%</span></td></tr><tr><td><strong>阿拉伯/阿语</strong></td><td style="text-align:right;">2</td><td style="text-align:right;">9,503 元</td><td style="text-align:right;">0.2%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.06%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68c94488000000000e02773d?xsec_token=YB4CatVFmwN6zzGOFdGMMaZrzYi4ULaPJmmW1IsxiOoiU=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">🇸🇦阿语0基础到高级｜到底要学多久</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 4,916 元 ｜ 流转率 0.04%</span></td></tr><tr><td><strong>意大利/意语</strong></td><td style="text-align:right;">4</td><td style="text-align:right;">6,428 元</td><td style="text-align:right;">0.2%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68590271000000001c034bd8?xsec_token=YBm8oX31zpbXJN1EFMiBMq-_K5f2UQXjcRDAfZojouU-0=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">新东方意大利语小班推荐！系统学习不走弯路</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 6,034 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>泰国/泰语</strong></td><td style="text-align:right;">1</td><td style="text-align:right;">1,633 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.13%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/6900a2ad0000000004029b60?xsec_token=YBUSIm4TFS8Ycu8s6qNBNlEaqQFsWW72mGASp-8zHgugs=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">领导让我在小红书上卖泰语课，1980行吗？</a><br><span style="font-size:12px;color:#999;">昆明新东方小语种 ｜ 图文 ｜ 消耗 1,633 元 ｜ 流转率 0.13%</span></td></tr><tr><td><strong>葡萄牙/葡语</strong></td><td style="text-align:right;">1</td><td style="text-align:right;">357 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68c94636000000000e02007a?xsec_token=YB4CatVFmwN6zzGOFdGMMaZpIL5MKuftI2PgBOF2R3xtw=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">🇵🇹葡语0基础到高级｜到底要学多久</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 357 元 ｜ 流转率 0.0%</span></td></tr></tbody></table>
+    <div class="insight-box"><div class="insight-title">流转率 Top3</div>法国/法语 0.29% ｜ 德国/德语 0.28% ｜ 西班牙/西语 0.26%（大盘 0.21%）</div>
+
+    <div class="insight-box" style="border-left-color:#FF9800;">
+      <div class="insight-title" style="color:#E65100;">⚠️ 德语：笔记量充足但消耗严重不足，需打造爆文</div>
+      <p style="margin-bottom:8px;">德语笔记数 <strong>268 条</strong>，在所有语种中排第 3（仅次于法语 333、日语 313），说明内容供给并不缺；但<strong>消耗仅 15.9 万</strong>，在笔记量相近的语种里垫底——法语 333 条对应 49.7 万消耗，西语 266 条对应 49.9 万，德语单位笔记撬动的消耗只有法语的<strong>三分之一</strong>。</p>
+      <p style="margin-bottom:8px;">而德语的效率数据是全场最好的一档：<strong>笔记流转率 0.28%</strong> 仅次于法语 0.29%、高于大盘 0.21%，其中<strong>搜索场域流转率 0.56% 是所有语种最高</strong>（法语 0.34%、西语 0.30%、日语 0.20%）；结案报告口径下德语搜索词流转率 0.92% 同样是高消耗语种第一。供需两端都指向同一个结论——德语不是没需求、也不是没内容，是<strong>没有能承载大额消耗的爆款笔记</strong>。</p>
+      <p style="margin-bottom:0;"><strong>动作</strong>：德语笔记消耗集中度太低（268 条摊 15.9 万，平均单篇不足 600 元），需要针对性打造 3-5 篇能吃住大预算的德语爆文。参考近 30 天德语赛道竞价流水 Top 笔记的选题与形式，优先复制高流水高 CTR 的内容结构。</p>
+    </div>
+    <div style="margin:16px 0 24px;text-align:center;">
+      <a href="german_top_notes.html" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#FF2442 0%,#FF6B6B 100%);color:#fff;padding:13px 30px;border-radius:26px;text-decoration:none;font-size:15px;font-weight:600;box-shadow:0 4px 14px rgba(255,36,66,0.32);">📋 查看德语近30天Top笔记清单 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">笔记榜 · 动机维度</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">少儿/启蒙流转率 0.46% 全场最高（搜索场域 0.74%），但只有 15 条笔记、消耗 13.1 万，是最典型的高价值未覆盖。移民/定居 0.34% 第二高，但仅 2 条笔记。考试/考级投了 498 条笔记、消耗 50.1 万，流转率却只有 0.14%，低于大盘 0.21%——投入第二大但效率偏弱。求职/职场 21 条笔记、流转率 0.04%，几乎没有转化承接。</p>
+    <table><thead><tr><th>动机</th><th style="width:58px;text-align:right;">笔记数</th><th style="width:78px;text-align:right;">消耗</th><th style="width:56px;text-align:right;">消耗占比</th><th style="width:86px;text-align:right;">流转率</th><th style="min-width:230px;">消耗最高笔记案例</th></tr></thead><tbody><tr><td><strong>学业/提升</strong></td><td style="text-align:right;">844</td><td style="text-align:right;">354.2 万</td><td style="text-align:right;">84.6%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.24%</span><br><span style="font-size:11px;color:#BBB;">推0.16%/搜0.28%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/65e80ebf000000000400090b?xsec_token=YBHws2j9fDW1PJGFk8LqCU2GAU3QPNrXwWyssr5RFuZXo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">小语种线上一对一推荐✅新东方网课高效学！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 79.1 万 ｜ 流转率 0.28%</span></td></tr><tr><td><strong>考试/考级</strong></td><td style="text-align:right;">498</td><td style="text-align:right;">50.1 万</td><td style="text-align:right;">12.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.14%</span><br><span style="font-size:11px;color:#BBB;">推0.13%/搜0.15%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685f995b00000000120215d5?xsec_token=YBK58ex_CPGei5gVwcBlxGSWRNSWctCzd_Ce8QC108uIA=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">敢不敢挑战俄语B2⁉️线上老师一对一教</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 10.2 万 ｜ 流转率 0.12%</span></td></tr><tr><td><strong>少儿/启蒙</strong></td><td style="text-align:right;">15</td><td style="text-align:right;">13.1 万</td><td style="text-align:right;">3.1%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.46%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.74%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67b42a9d00000000290112fa?xsec_token=YBuk4wL7sHqOLlFUlEqQ9x89u1eROUT8n4S25APxnH2i0=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">新东方少儿法语❗️真的让孩子越学越上瘾‼</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 5.7 万 ｜ 流转率 0.48%</span></td></tr><tr><td><strong>留学</strong></td><td style="text-align:right;">19</td><td style="text-align:right;">9,894 元</td><td style="text-align:right;">0.2%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.12%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68836d64000000002203ff2d?xsec_token=YBdKZapbjuXaw2JR-mZMz7d-qRXZS-NA3x499CQVtOORo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">🇷🇺整理了俄罗斯热门大学留学语言要求</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 2,146 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>求职/职场</strong></td><td style="text-align:right;">21</td><td style="text-align:right;">1,857 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.04%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68665627000000002203d477?xsec_token=YBV-_1KCYXZ4X9Sn8-TTpVUeGH7JU4zoMBMiB7-m10gU4=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">从不会说到能用日语聊工作，是怎么做到的</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 907 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>兴趣/文化</strong></td><td style="text-align:right;">1</td><td style="text-align:right;">1,104 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/682da6e9000000000303b497?xsec_token=YBq6DovZ4nc38i5igCaUHB4qCMQ35-aPxEPldS2JdwXxw=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">追星人请进🔥kpop人学韩语速度就是快！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 1,104 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>移民/定居</strong></td><td style="text-align:right;">2</td><td style="text-align:right;">542 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.34%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68aab248000000001c03175f?xsec_token=YBccEhAITKUneFCzteettmykK5-iPYujgbnzpBqHRleoE=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">🇨🇦想移民加拿大？试试CLB法语通道！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 468 元 ｜ 流转率 0.62%</span></td></tr></tbody></table>
+    <div class="insight-box"><div class="insight-title">流转率 Top3</div>少儿/启蒙 0.46% ｜ 移民/定居 0.34%（仅 2 条笔记）｜ 学业/提升 0.24%（大盘 0.21%）</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">笔记榜 · 学习需求维度</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">需求维度分 13 档，并按场景型/决策型标注（详见下方拆解）。读不出需求指向的「泛品牌招生」占 454 条、194.9 万，流转率 0.24%；效率最高的是「价格/性价比决策」0.45%，但只投了 42 条笔记、19.2 万。口语/会话（17 条）、词汇/语法（2 条）、阅读/写作（2 条）、听力（1 条）四类语言技能内容合计不足 0.5 万消耗，严重缺位。</p>
+    <table><thead><tr><th>学习需求</th><th style="width:76px;">需求类型</th><th style="width:58px;text-align:right;">笔记数</th><th style="width:78px;text-align:right;">消耗</th><th style="width:56px;text-align:right;">消耗占比</th><th style="width:86px;text-align:right;">流转率</th><th style="min-width:230px;">消耗最高笔记案例</th></tr></thead><tbody><tr style="background:#FAFAFA;color:#999;"><td><strong>泛品牌招生（无需求信号）</strong></td><td><span style="background:#FAFAFA;color:#9E9E9E;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">无信号</span></td><td style="text-align:right;">454</td><td style="text-align:right;">194.9 万</td><td style="text-align:right;">46.5%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.24%</span><br><span style="font-size:11px;color:#BBB;">推0.20%/搜0.35%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/65e80ebf000000000400090b?xsec_token=YBHws2j9fDW1PJGFk8LqCU2GAU3QPNrXwWyssr5RFuZXo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">小语种线上一对一推荐✅新东方网课高效学！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 79.1 万 ｜ 流转率 0.28%</span></td></tr><tr><td><strong>学习周期/时间安排</strong></td><td><span style="background:#E3F2FD;color:#1565C0;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">决策型</span></td><td style="text-align:right;">53</td><td style="text-align:right;">62.7 万</td><td style="text-align:right;">15.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.18%</span><br><span style="font-size:11px;color:#BBB;">推0.16%/搜0.16%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685bd2590000000022031deb?xsec_token=YBbGrm-vAC8A0daDjutDT2bz780detjcag0P5KCkaBTZg=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">晚上7点准时上线📢日语小班直播课不掉队</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 22.6 万 ｜ 流转率 0.18%</span></td></tr><tr><td><strong>选课/机构决策</strong></td><td><span style="background:#E3F2FD;color:#1565C0;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">决策型</span></td><td style="text-align:right;">115</td><td style="text-align:right;">56.3 万</td><td style="text-align:right;">13.4%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.27%</span><br><span style="font-size:11px;color:#BBB;">推0.06%/搜0.24%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/66cdad31000000001d039af7?xsec_token=YBxqfE24PRynjebff8nKENSPTAEjTDNXpQs5rqYaSYcHo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">学小语种，来新东方🔥 3月开班表来啦✅</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 18.5 万 ｜ 流转率 0.38%</span></td></tr><tr><td><strong>级别达标/等级规划</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">368</td><td style="text-align:right;">52.5 万</td><td style="text-align:right;">12.5%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.15%</span><br><span style="font-size:11px;color:#BBB;">推0.17%/搜0.16%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685f995b00000000120215d5?xsec_token=YBK58ex_CPGei5gVwcBlxGSWRNSWctCzd_Ce8QC108uIA=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">敢不敢挑战俄语B2⁉️线上老师一对一教</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 10.2 万 ｜ 流转率 0.12%</span></td></tr><tr><td><strong>自学受挫/需要督学</strong></td><td><span style="background:#E3F2FD;color:#1565C0;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">决策型</span></td><td style="text-align:right;">60</td><td style="text-align:right;">21.9 万</td><td style="text-align:right;">5.2%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.22%</span><br><span style="font-size:11px;color:#BBB;">推0.13%/搜0.19%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67f8c3fb000000001201c5ec?xsec_token=YBkVgxLRFNPBHq2UGhUgKFgBIP4Rqb6-Tqr9DpixEcFBU=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">受够自学的苦了😭新东方法语网课超香的！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 9.7 万 ｜ 流转率 0.19%</span></td></tr><tr><td><strong>价格/性价比决策</strong></td><td><span style="background:#E3F2FD;color:#1565C0;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">决策型</span></td><td style="text-align:right;">42</td><td style="text-align:right;">19.2 万</td><td style="text-align:right;">4.6%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.45%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.60%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67b8548f000000000903b10f?xsec_token=YBWEd4SdoBzR-nfLGgG5AUN9x3eaHB51XiDnP1oqPWzgg=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">新东方日语1v1到底多少钱？</a><br><span style="font-size:12px;color:#999;">新东方日语 ｜ 图文 ｜ 消耗 5.8 万 ｜ 流转率 0.35%</span></td></tr><tr><td><strong>入门/零基础</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">91</td><td style="text-align:right;">6.8 万</td><td style="text-align:right;">1.6%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.13%</span><br><span style="font-size:11px;color:#BBB;">推0.33%/搜0.12%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67f8cfd9000000000900f779?xsec_token=YBkVgxLRFNPBHq2UGhUgKFgC4U5oKlt3Npta4fI4iSejg=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">才发现这门网课🤯零基础学韩语没那么复杂</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 1.5 万 ｜ 流转率 0.32%</span></td></tr><tr><td><strong>考试备考</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">191</td><td style="text-align:right;">4.2 万</td><td style="text-align:right;">1.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.10%</span><br><span style="font-size:11px;color:#BBB;">推0.06%/搜0.13%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/689c04a8000000001c031f69?xsec_token=YB1hkN0d95pHNP58AfnTS419_IdFvH7ZA4t0mtDmBywwo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">现在开始学日语，报名12月JLPT考N2能过吗？</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 4,769 元 ｜ 流转率 0.05%</span></td></tr><tr><td><strong>口语/会话</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">17</td><td style="text-align:right;">2,822 元</td><td style="text-align:right;">0.1%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.10%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/6790a7bd000000002503c826?xsec_token=YBH_GLq7ZGCoI_9ZLB8hHVnL-c2PWWNrZZTgakEANdRsA=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">0-B2这样学，俄语“听说读写”一举拿下💪</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 1,402 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>词汇/语法</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">2</td><td style="text-align:right;">951 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.14%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67e2539b000000000e00500e?xsec_token=YBv96ZyIAoiKb1zl1b0xaIj9l81y5JabyYn-fIatMX_4M=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">学西语必须明白只刷题和背单词是不够的😭</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 951 元 ｜ 流转率 0.14%</span></td></tr><tr><td><strong>阅读/写作</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">2</td><td style="text-align:right;">58 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68556c24000000000d026457?xsec_token=YBgaGcN1v75Syz9Y2lbqELBFnliWqhDI-zPsNeBEN8eaw=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">德福备考｜写作题目里的论点能不能照抄？</a><br><span style="font-size:12px;color:#999;">新东方德语 ｜ 视频 ｜ 消耗 40 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>商务/专业</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">4</td><td style="text-align:right;">35 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/6a16994b0000000035029aab?xsec_token=YBtCrjeH_IdTWPlrEnhZOaxtXeKLQsKNIx4P2n7JHyE3M=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">西语水平工作不够用？新东方商务西语不踩坑</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 20 元 ｜ 流转率 0.0%</span></td></tr><tr><td><strong>听力</strong></td><td><span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;">场景型</span></td><td style="text-align:right;">1</td><td style="text-align:right;">21 元</td><td style="text-align:right;">0.0%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.00%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685ffdeb000000000b01f043?xsec_token=YBK58ex_CPGei5gVwcBlxGSYiENivoDT36bvGX7jgWXTw=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">德福听力涂卡翻车？徐立华老师有这3招！</a><br><span style="font-size:12px;color:#999;">新东方德语 ｜ 视频 ｜ 消耗 21 元 ｜ 流转率 0.0%</span></td></tr></tbody></table>
+    <div class="insight-box" style="border-left-color:#1565C0;">
+      <div class="insight-title" style="color:#0D47A1;">需求类型拆解：决策型消耗是场景型的 2.5 倍，且流转效率更高</div>
+      <p style="margin-bottom:8px;">13 档需求按性质归三类：<strong style="color:#2E7D32;">场景型</strong>（解决具体语言能力或应试问题）消耗 <strong>63.9 万（15.3%）、流转率 0.14%</strong>；<strong style="color:#1565C0;">决策型</strong>（做报班决策：选哪家、多少钱、什么时间、自学撑不下去）消耗 <strong>160.0 万（38.2%）、流转率 0.25%</strong>；<strong>泛品牌招生</strong>（标题读不出需求）消耗 194.9 万（46.5%）、流转率 0.24%。决策型不光消耗大 2.5 倍，流转效率还比场景型高 <strong>80%</strong>——用户是带着"该不该报、报哪家"进来的，不是带着"怎么背单词"进来的。</p>
+      <p style="margin-bottom:8px;">看单档效率排名，结论更明确：<strong style="color:#00A67E;">「价格/性价比决策」流转率 0.45% 是全部 13 档第一</strong>（搜索场域 0.60%），但消耗只有 19.2 万；「选课/机构决策」0.27% 排第二、消耗 56.3 万。反过来看消耗最大的两档效率并不突出——「学习周期/时间安排」62.7 万但流转率仅 0.18%，「级别达标/等级规划」52.5 万、368 条笔记，流转率 0.15% 是决策型与场景型交叉里的低位。</p>
+      <p style="margin-bottom:0;"><strong>动作建议</strong>：① <strong>加投「价格/性价比决策」</strong>——0.45% 的流转率配 19.2 万的消耗，是明显的效率高地，"1v1 到底多少钱""偷偷算了一下学习真的不用很多💰"这类价格透明化内容还有很大放量空间；② <strong>「级别达标/等级规划」需要复盘</strong>——368 条笔记（占全榜 26%）只跑出 0.15% 流转率，内容量投入最大但转化最弱，建议检查是否把"A1-C1 要多久"这类科普当成了转化型内容投放；③ 纯语言技能档（口语 0.10%、词汇语法 0.14%、听力/阅读写作 0%）触达量都在千级以下，样本不足以判断效率，若要开拓需先小预算测试。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">笔记榜 · 内容角度维度</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">课程/品牌推广 988 条、消耗 365.6 万占 87.3%，是绝对主力，流转率 0.22% 与大盘持平。<strong>学员体验/口碑流转率 0.38% 全场最高</strong>（搜索场域 0.93%），但仅 40 条笔记、2.4 万消耗——第一人称真实体感内容是效率最好的角度却几乎没投。知识分享/学习方法 150 条、33.2 万，流转率 0.15% 低于大盘；考试/备考 188 条但流转率仅 0.09%，是所有角度里最低。</p>
+    <table><thead><tr><th>内容角度</th><th style="width:58px;text-align:right;">笔记数</th><th style="width:78px;text-align:right;">消耗</th><th style="width:56px;text-align:right;">消耗占比</th><th style="width:86px;text-align:right;">流转率</th><th style="min-width:230px;">消耗最高笔记案例</th></tr></thead><tbody><tr><td><strong>课程/品牌推广</strong></td><td style="text-align:right;">988</td><td style="text-align:right;">365.6 万</td><td style="text-align:right;">87.3%</td><td style="text-align:right;"><span style="color:#FF9800;font-weight:600;">0.22%</span><br><span style="font-size:11px;color:#BBB;">推0.17%/搜0.26%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/65e80ebf000000000400090b?xsec_token=YBHws2j9fDW1PJGFk8LqCU2GAU3QPNrXwWyssr5RFuZXo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">小语种线上一对一推荐✅新东方网课高效学！</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 79.1 万 ｜ 流转率 0.28%</span></td></tr><tr><td><strong>知识分享/学习方法</strong></td><td style="text-align:right;">150</td><td style="text-align:right;">33.2 万</td><td style="text-align:right;">7.9%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.15%</span><br><span style="font-size:11px;color:#BBB;">推0.13%/搜0.12%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67ed01860000000007034908?xsec_token=YBrc0vAJVgEzQYqiRqekIkdyUnjflqrICsbMn2FOSVNL8=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">总结了一个俄语一年next level的学习法🤗</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 8.5 万 ｜ 流转率 0.11%</span></td></tr><tr><td><strong>老师/教学展示</strong></td><td style="text-align:right;">20</td><td style="text-align:right;">11.7 万</td><td style="text-align:right;">2.8%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.12%</span><br><span style="font-size:11px;color:#BBB;">推0.16%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/685f995b00000000120215d5?xsec_token=YBK58ex_CPGei5gVwcBlxGSWRNSWctCzd_Ce8QC108uIA=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">敢不敢挑战俄语B2⁉️线上老师一对一教</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 10.2 万 ｜ 流转率 0.12%</span></td></tr><tr><td><strong>考试/备考</strong></td><td style="text-align:right;">188</td><td style="text-align:right;">4.9 万</td><td style="text-align:right;">1.2%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.09%</span><br><span style="font-size:11px;color:#BBB;">推0.07%/搜0.17%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/69b2a133000000000b034599?xsec_token=YBjrlD9OOJXWINjSavLJyq5Aen9rlwnBd8dQXH4kVl4to=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">现在开始3个月可以把德福提升到什么水平？</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 7,436 元 ｜ 流转率 0.21%</span></td></tr><tr><td><strong>学员体验/口碑</strong></td><td style="text-align:right;">40</td><td style="text-align:right;">2.4 万</td><td style="text-align:right;">0.6%</td><td style="text-align:right;"><span style="color:#00A67E;font-weight:700;">0.38%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.93%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/67e7e431000000001200c2a9?xsec_token=YBbOL6PySwo1zG78U8hkxmgMIsnfVNMEpDW_WpK2d2iEU=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">新东方俄语网课3个月突破C1是什么体验</a><br><span style="font-size:12px;color:#999;">新东方欧亚小语种 ｜ 图文 ｜ 消耗 7,128 元 ｜ 流转率 0.17%</span></td></tr><tr><td><strong>留学/院校</strong></td><td style="text-align:right;">14</td><td style="text-align:right;">9,432 元</td><td style="text-align:right;">0.2%</td><td style="text-align:right;"><span style="color:#999;font-weight:600;">0.11%</span><br><span style="font-size:11px;color:#BBB;">推0.00%/搜0.00%</span></td><td><a href="https://www.xiaohongshu.com/discovery/item/68836d64000000002203ff2d?xsec_token=YBdKZapbjuXaw2JR-mZMz7d-qRXZS-NA3x499CQVtOORo=&xsec_source=pc_idea" target="_blank" style="color:#FF2442;text-decoration:none;">🇷🇺整理了俄罗斯热门大学留学语言要求</a><br><span style="font-size:12px;color:#999;">新东方小语种 ｜ 图文 ｜ 消耗 2,146 元 ｜ 流转率 0.0%</span></td></tr></tbody></table>
+  </div>
+
+  <!-- 热搜词榜分析 -->
+  <div class="card">
+    <div class="card-title">热搜词榜 · 国家/语种维度</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">葡萄牙/葡语流转率 1.91% 最高但消耗仅 761 元。意大利/意语 1.18% 第二高但消耗 2047 元。德语 0.92% 在高消耗语种中最高。日语消耗 5.7 万最多但流转率 0.45% 低于大盘。</p>
+
+    
+    <table>
+      <tr><th>排名</th><th>国家/语种</th><th>消耗</th><th>占比</th><th>触达人数</th><th>流转人数</th><th>流转率</th><th>词数</th></tr>
+      <tr><td>1</td><td>西班牙/西语</td><td>6.7 万</td><td>22.5%</td><td>3.2 万</td><td>162</td><td>0.51%</td><td>211</td></tr>
+      <tr><td>2</td><td>日本/日语</td><td>5.7 万</td><td>19.3%</td><td>2.7 万</td><td>124</td><td>0.45%</td><td>307</td></tr>
+      <tr><td>3</td><td>法国/法语</td><td>4.4 万</td><td>14.9%</td><td>2.2 万</td><td>137</td><td>0.62%</td><td>189</td></tr>
+      <tr class="highlight-row"><td>4</td><td>德国/德语</td><td>2.0 万</td><td>6.9%</td><td>7062</td><td>65</td><td>0.92%</td><td>107</td></tr>
+      <tr><td>5</td><td>俄罗斯/俄语</td><td>2.0 万</td><td>6.8%</td><td>9979</td><td>45</td><td>0.45%</td><td>83</td></tr>
+      <tr><td>6</td><td>韩国/韩语</td><td>1.5 万</td><td>5.2%</td><td>3571</td><td>27</td><td>0.76%</td><td>79</td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>8</td><td>意大利/意语</td><td>0.2 万</td><td>0.7%</td><td>424</td><td>5</td><td>1.18%</td><td>14</td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>9</td><td>葡萄牙/葡语</td><td>0.08 万</td><td>0.3%</td><td>209</td><td>4</td><td>1.91%</td><td>6</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">热搜词榜 · 词性维度</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">品牌口碑词流转率 1.04% 最高但仅 11 个词、消耗 2080 元。竞品词流转率 0.82% 第二高但消耗 2.95 万。品类词消耗 19.6 万占 66% 但流转率 0.50% 低于大盘。</p>
+    <table>
+      <tr><th>排名</th><th>词性</th><th>消耗</th><th>占比</th><th>触达人数</th><th>流转人数</th><th>流转率</th><th>词数</th></tr>
+      <tr><td>1</td><td>品类词</td><td>19.6 万</td><td>66.2%</td><td>8.0 万</td><td>402</td><td>0.50%</td><td>972</td></tr>
+      <tr><td>2</td><td>考试词</td><td>3.0 万</td><td>10.3%</td><td>2.2 万</td><td>93</td><td>0.42%</td><td>225</td></tr>
+      <tr><td>3</td><td>竞品词</td><td>3.0 万</td><td>10.0%</td><td>7707</td><td>63</td><td>0.82%</td><td>77</td></tr>
+      <tr><td>4</td><td>课程词</td><td>2.6 万</td><td>8.7%</td><td>9935</td><td>61</td><td>0.61%</td><td>57</td></tr>
+      <tr><td>5</td><td>品牌词</td><td>1.1 万</td><td>3.6%</td><td>2667</td><td>22</td><td>0.82%</td><td>42</td></tr>
+      <tr class="highlight-row"><td>6</td><td>品牌口碑词</td><td>0.2 万</td><td>0.7%</td><td>769</td><td>8</td><td>1.04%</td><td>11</td></tr>
+      <tr><td>7</td><td>口碑词</td><td>0.2 万</td><td>0.5%</td><td>171</td><td>0</td><td>0.00%</td><td>12</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">本品牌词 & 竞品词</div>
+    <div class="section-title">本品牌词</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">本品牌词 53 个，消耗 1.27 万，触达 3436 人，流转 30 人，流转率 0.87%。高于大盘 0.53%，说明品牌词搜索承接有效，但消耗规模偏小。</p>
+    <table>
+      <tr><th>品牌</th><th>消耗</th><th>触达人数</th><th>流转人数</th><th>流转率</th><th>词数</th></tr>
+      <tr class="highlight-row"><td>新东方</td><td>1.27 万</td><td>3436</td><td>30</td><td>0.87%</td><td>53</td></tr>
+    </table>
+    <div class="section-title">竞品词</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);">竞品词消耗 2.95 万但主要来自"其他竞品"泛词（3.2 万），欧那小语种仅 19 元。竞品词流转率 0.82% 高于大盘，说明用户搜竞品时新东方有截流机会。</p>
+    <table>
+      <tr><th>竞品</th><th>消耗</th><th>触达人数</th><th>流转人数</th><th>流转率</th><th>词数</th></tr>
+      <tr class="highlight-row"><td>其他竞品</td><td>3.2 万</td><td>8665</td><td>76</td><td>0.88%</td><td>91</td></tr>
+      <tr><td>欧那小语种</td><td>19</td><td>4</td><td>0</td><td>0.00%</td><td>1</td></tr>
+    </table>
+  </div>
+
+  <!-- 交叉分析 -->
+  <div class="card">
+    <div class="card-title">供需交叉分析</div>
+
+    <div class="section-title">⚠️ 内容缺口（搜索有需求但笔记覆盖不足）</div>
+    <table>
+      <tr><th>维度</th><th>搜索消耗/流转率</th><th>笔记数/消耗</th><th>缺口判断</th></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>葡萄牙/葡语</td><td>消耗 761 元，流转率 1.91%</td><td>笔记 0 条</td><td><span class="badge badge-red">完全空白</span></td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>意大利/意语</td><td>消耗 2047 元，流转率 1.18%</td><td>笔记 4 条，消耗 6428 元</td><td><span class="badge badge-red">笔记严重不足</span></td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>少儿/启蒙</td><td>流转率 1.82% 最高</td><td>笔记 23 条，消耗 25.8 万</td><td><span class="badge badge-orange">笔记偏少</span></td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>兴趣/文化</td><td>流转率 1.49%</td><td>笔记 8 条，消耗 3.1 万</td><td><span class="badge badge-red">笔记严重不足</span></td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>阅读/写作</td><td>流转率 1.46%</td><td>笔记 3 条，消耗 67 元</td><td><span class="badge badge-red">笔记严重不足</span></td></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;"><td>词汇/语法</td><td>流转率 0.69%</td><td>笔记 3 条，消耗 1026 元</td><td><span class="badge badge-red">笔记严重不足</span></td></tr>
+      <tr><td>留学</td><td>流转率 1.24%</td><td>笔记 24 条，消耗 1.3 万</td><td><span class="badge badge-orange">笔记偏少</span></td></tr>
+    </table>
+
+    <div class="section-title">🔥 高价值未覆盖（搜索流转率高于均值但笔记覆盖少）</div>
+    <div class="insight-box" style="border-left-color:#FF2442;">
+      <div class="insight-title" style="color:#FF2442;">Top 3 高价值未覆盖</div>
+      <ol style="padding-left:20px;line-height:2;">
+        <li><strong>兴趣/文化</strong>：搜索流转率 1.49%（高于均值 0.53% 近 3 倍），笔记仅 8 条——用户在"小语种 × 文化兴趣"场景有高转化需求，但品牌内容完全缺位。</li>
+        <li><strong>阅读/写作</strong>：搜索流转率 1.46%（高于均值近 3 倍），笔记仅 3 条——"小语种阅读理解/写作训练"需求有搜索承接但无内容承接。</li>
+        <li><strong>词汇/语法</strong>：搜索流转率 0.69%，笔记仅 3 条——"小语种词汇/语法"基础学习需求有搜索但无内容。</li>
+      </ol>
+    </div>
+
+    <div class="section-title">⚡ 资源错配（笔记成交率高但消耗占比低）</div>
+    <div class="insight-box" style="border-left-color:#FF9800;">
+      <div class="insight-title" style="color:#FF9800;">Top 3 资源错配</div>
+      <ol style="padding-left:20px;line-height:2;">
+        <li><strong>德语笔记</strong>：笔记流转率 0.28%（仅次于法语 0.29%），搜索场域 0.56% 全场第一，但消耗仅 15.9 万、不到法语的三分之一——德语效率最好但投入严重不足。搜索词侧德语流转率 0.92% 也是高消耗语种中最高，供需两端都指向"德语加码"。</li>
+        <li><strong>韩语笔记</strong>：笔记流转率 0.24% 高于大盘 0.21%，其中推荐场域 0.34% 是全部语种最高，但只有 32 条笔记、7.4 万消耗——韩语是内容量最小的主力语种，几乎从 0 起步。搜索侧韩语流转率 0.76% 同样高于大盘。</li>
+        <li><strong>学员体验/口碑类笔记</strong>：流转率 0.38% 是全部内容角度最高（搜索场域 0.93%），但仅 40 条笔记、2.4 万消耗——学员第一人称真实体感内容效率最好却投入最少。搜索侧兴趣/文化动机流转率 1.49% 也远高于均值，可与 UGC 口碑内容结合承接。</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== Tab 4: 行动建议 ========== -->
+<div class="tab-content" id="tab4">
+
+  <div class="card">
+    <div class="card-title">综合行动建议</div>
+    <div class="conclusion-box">
+      基于一方成交用户路径分析 + 结案报告供需分析 + 单用户决策路径还原，按三个层次组织行动建议：<strong>P0 补内容缺口与搜索卡位</strong>（供需两端都验证过效率、但投入严重不足的机会点，立即执行）；<strong>P1 搭账号矩阵与达人体系</strong>（当前完全空白的能力建设，本季度启动）；<strong>P2 按决策阶段做内容与场域精细化</strong>（结构性优化，下季度推进）。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P0 · 内容补充 + 搜索优化（立即执行）</div>
+    <p style="margin-bottom:14px;color:var(--text-secondary);font-size:14px;">共同特征：笔记侧或搜索侧流转率已明显高于大盘，但消耗/内容量严重不足——属于"验证过有效、只是没投"的确定性机会，投入产出比最高。</p>
+    <table class="priority-table">
+      <tr><th>优先级</th><th>行动项</th><th>数据依据</th><th>具体做法</th></tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>德语内容 + 搜索双加码</strong></td>
+        <td>笔记流转率 0.28%（仅次法语 0.29%、高于大盘 0.21%）｜ 搜索场域流转率 0.56% 全语种第一 ｜ 但消耗仅 15.9 万，不到法语 49.7 万的三分之一 ｜ 268 条笔记摊 15.9 万，平均单篇不足 600 元 ｜ 单用户 A 临门期一天看 6 篇品牌笔记</td>
+        <td>笔记消耗提至法语量级（15.9 万→35-40 万）｜ 打造 3-5 篇能吃住大预算的德语爆文，参考近 30 天德语赛道 Top 笔记的"班型+级别路径"与"价格锚点+目标级别"结构 ｜ 搜索侧德语词加码</td>
+      </tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>葡语 + 意语内容从 0 到 1</strong></td>
+        <td>搜索词流转率 1.91% / 1.18%，分列全部语种第一第二 ｜ 但笔记侧葡语仅 1 条、意语 4 条，消耗合计不足 6 千元，流转率 0.00% ｜ 搜索有需求、内容完全空白</td>
+        <td>各产出 10-20 篇入门内容（0 基础到高级要多久、语言证书体系、留学/就业出路）｜ 同步卡位"葡萄牙语网课""意大利语入门"等品类词 ｜ 先小预算验证再决定放量</td>
+      </tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>韩语内容加码（内容量从 0 到 1）</strong></td>
+        <td>笔记流转率 0.24% 高于大盘 0.21%，<strong>推荐场域 0.34% 是全部语种最高</strong> ｜ 但仅 32 条笔记、7.4 万消耗，是主力语种里内容量最小的一档（法语 333 条、日语 313 条、德语 268 条）｜ 搜索侧韩语流转率 0.76% 也高于大盘</td>
+        <td>内容量从 32 条提到 100 条以上，对齐其他主力语种 ｜ 优先补推荐场域内容（该场域效率全场最高）｜ 扩充韩语品类词与品牌词买词 ｜ TOPIK 等级路径类内容优先</td>
+      </tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>少儿语种内容加码</strong></td>
+        <td>动机维度笔记流转率 0.46% 全场最高（搜索场域 0.74%）｜ 但仅 15 条笔记、13.1 万消耗 ｜ 搜索侧少儿类流转率 1.82% 最高但消耗仅 1,737 元 ｜ 内容关键词"少儿"84 次 /"儿童"60 次</td>
+        <td>少儿日语/法语/德语内容各补 15-20 篇 ｜ 扩充"少儿XX""儿童XX启蒙"搜索词 ｜ 内容角度用家长视角（学多久见效、几岁开始、和成人课差别）｜ 评估是否开设少儿语种产品线</td>
+      </tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>求职场景内容补齐</strong></td>
+        <td>用户 C（国内德语求职型）在求职焦虑期反复搜"德语出路""德语就业""法语就业"，触达的全是行业内容（"2026德专业应届生真的很难""字节跳动全德语面试"），<strong>品牌在该线零内容承接</strong> ｜ 求职/职场动机 21 条笔记、流转率 0.04%，几乎无转化</td>
+        <td>产出"小语种 × 求职"场景内容：德语就业方向盘点、小语种进外企/跨境电商路径、语言等级与岗位薪资对应关系 ｜ 承接"XX语就业""XX语出路"类搜索词 ｜ 区别于留学线单独立项</td>
+      </tr>
+      <tr>
+        <td><span class="badge p0">P0</span></td>
+        <td><strong>品类搜索词卡位</strong></td>
+        <td>品类词消耗 19.6 万占搜索 66%，但流转率 0.50% 低于搜索大盘 0.53% ｜ 品类搜索路径占用户入场 Top2（19.09%）｜ 搜索词 TOP20 以品类词为主，品牌承接不足</td>
+        <td>围绕"日语网课""法语网课""德语网课""韩语网课""西语网课"产出 SEO 友好图文 ｜ 确保每个语种品类词搜索结果首页有新东方内容 ｜ 品类词落地页对齐"选课/机构决策"需求（该档流转率 0.27%）</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P1 · 账号矩阵搭建（本季度启动）</div>
+    <p style="margin-bottom:14px;color:var(--text-secondary);font-size:14px;">共同特征：本品牌当前完全空白、而行业已跑通的能力项——不是加预算能解决的，需要从 0 搭体系。</p>
+    <table class="priority-table">
+      <tr><th>优先级</th><th>行动项</th><th>数据依据</th><th>具体做法</th></tr>
+      <tr>
+        <td><span class="badge p1">P1</span></td>
+        <td><strong>UGC 种草体系搭建 × 品牌口碑词卡位</strong></td>
+        <td>本品牌 UGC 场域占比 <strong>0</strong> vs 小语种行业 5.23%，完全缺位 ｜ 笔记侧「学员体验/口碑」流转率 <strong>0.38% 是全部内容角度最高</strong>（搜索场域 0.93%），但仅 40 条笔记、2.4 万消耗 ｜ 品牌口碑词流转率 1.04% 全词类最高，但仅 11 个词、2,080 元 ｜ 行业热搜词"新东方日语网课靠谱吗"38 次，口碑验证需求未被满足 ｜ 用户 B 临门期反复触达"新东方德语1v1到底多少钱""在北京新东方上德语课的一天"</td>
+        <td><strong>两件事必须绑在一起做</strong>：① 邀请已成交学员产出真实体验笔记（学了多久、花了多少、老师怎么带、值不值），重点语种日语/法语/德语，形成持续供给而非一次性活动；② 同步扩充"新东方XX怎么样""新东方XX靠谱吗""新东方XX多少钱"口碑词买词，让 UGC 内容成为口碑词搜索结果的承接落地页——只做内容不买词等于白产，只买词没内容承接会把用户送给竞品</td>
+      </tr>
+      <tr>
+        <td><span class="badge p1">P1</span></td>
+        <td><strong>蒲公英达人合作 × 用户路径内容方向种草</strong></td>
+        <td>本品牌蒲公英场域占比 <strong>0</strong> vs 行业 0.91%，完全缺位 ｜ 德语赛道近 30 天 CTR Top 位置全被个人博主的第一人称叙事占据（德语老师贝拉 16.69%、德语老师 Lore 11.10%、德语老师妮娜 9.35%），本品牌 8 篇入榜笔记平均 CTR 3.20% 低于 Top50 大盘 3.88% ｜ 内容关键词"老师"219 次排名第一 ｜ 三位单用户中期均在自学资源/教材场景触达行业内容（新求精 11 次、Nico's Weg 4 次、德语教材推荐 7 次），品牌在"自学转报班"窗口零露出</td>
+        <td>按<strong>用户路径揭示的三个内容方向</strong>选达人和定选题，而不是泛投垂类达人：① <strong>自学转报班窗口</strong>——"自学到 A2 之后为什么卡住""新求精/Nico 教材怎么配课"，承接用户 B 那类德语自学转报班人群；② <strong>熟龄/在职转型</strong>——用户 B 是熟龄双元制人群，行业已有"33岁我被低定价的德语课程毁了"这类高 CTR 内容而品牌无对标；③ <strong>求职出路</strong>——对齐用户 C 的德语就业焦虑。合作形态优先第一人称叙事（学员/老师视角），不做硬广式课程推介</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P2 · 内容与场域精细化（下季度推进）</div>
+    <p style="margin-bottom:14px;color:var(--text-secondary);font-size:14px;">共同特征：结构性优化——不新增内容线，而是把现有内容按决策阶段、表达方式、投放场域重新配置。</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P2-1 · 基于决策阶段的内容与场域策略</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);font-size:14px;">48.73% 用户决策周期超过 90 天，三位单用户分别是 177 / 205 / 273 天。长周期意味着同一个用户在不同阶段需要完全不同的内容——用一套内容打全程，等于三个阶段都只打中一段。需求维度数据也印证了这点：<strong>决策型需求消耗 160 万、流转率 0.25%，是场景型 63.9 万 / 0.14% 的 2.5 倍消耗、1.8 倍效率</strong>，用户是带着"该不该报、报哪家"进来的。</p>
+    <table>
+      <tr><th>决策阶段</th><th>时间窗口</th><th>对应需求档（含流转率）</th><th>内容策略</th><th>场域策略</th></tr>
+      <tr>
+        <td><span class="badge badge-green">早期（品类探索）</span></td>
+        <td>距成交 &gt;90 天</td>
+        <td>级别达标/等级规划 0.15%<br>入门/零基础 0.13%</td>
+        <td>品类入门知识、语种选择指南、"0 到 B2 要多久"学习路线图</td>
+        <td>搜索流卡位品类词 + 信息流种草</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">中期（品牌对比）</span></td>
+        <td>30-90 天</td>
+        <td>选课/机构决策 0.27%<br>自学受挫/需要督学 0.22%</td>
+        <td>品牌 vs 竞品对比、班型与课程体系展示、名师 IP、"自学撑不下去要不要报班"</td>
+        <td>搜索流品牌词 + 信息流 retargeting ｜ 竞品词截流（竞品词流转率 0.82% 高于搜索大盘 0.53%，34.62% 用户接触 10+ 竞品）</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><span class="badge badge-red">临门（口碑验证）</span></td>
+        <td>&lt;30 天</td>
+        <td><strong>价格/性价比决策 0.45%（13 档第一，搜索场域 0.60%）</strong></td>
+        <td>学员真实体验、口碑证言、<strong>价格透明化</strong>（"1v1 到底多少钱""算了一下真的不用很多"）、试听课</td>
+        <td>搜索流口碑词 + 品牌词定投 ｜ 该档当前仅 42 条笔记、19.2 万消耗，是最明确的效率高地，优先加投</td>
+      </tr>
+    </table>
+    <div class="insight-box">
+      <div class="insight-title">配套机制：长周期分层触达</div>
+      对首次阅读用户按 7 天 / 30 天 / 90 天未回搜做分层推送——早期给品类探索内容、中期给品牌对比、临门给价格与口碑验证。当前投放没有阶段区分，导致「级别达标/等级规划」这类早期科普内容（368 条笔记占全榜 26%、消耗 52.5 万）跑出的流转率只有 0.15%，低于大盘 0.21%：不是内容不好，是把早期科普当成了转化型内容在投。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P2-2 · 内容差异化建议（名师 IP 化）</div>
+    <div class="conclusion-box">
+      基于单用户路径揭示的"本品牌赢在哪里"与德语赛道 CTR 榜的对照，三个差异化方向按优先级排列：
+    </div>
+    <div class="insight-box" style="border-left-color:#00C9A7;">
+      <div class="insight-title" style="color:#00C9A7;">1. 名师 IP 化（首要方向）</div>
+      内容关键词"老师"219 次排名第一，而德语赛道近 30 天 CTR Top 全被个人老师账号占据——德语老师贝拉"7年了，我是不是不适合教德语"16.69%、德语老师 Lore"我不是想劝退你，只是想让你能真正掌握德语"11.10%、德语老师妮娜"打工人报了一个很严的德语课是什么感受"9.35%，普遍是本品牌课程推广类笔记（2%~6%）的 3-5 倍。本品牌在 Top50 中占 8 篇，平均 CTR 3.20%，低于榜单大盘 3.88%。<strong>做法</strong>：从各语种挑 3-5 位老师做人格化 IP，以老师第一人称产出系列内容（为什么劝退你、我怎么带差生、教了 7 年的真实感受），而非以机构口吻做课程推介。这是当前最明确的 CTR 提升杠杆。
+    </div>
+    <div class="insight-box" style="border-left-color:#5252FF;">
+      <div class="insight-title" style="color:#5252FF;">2. 品牌可信度与价格透明</div>
+      行业热搜词"新东方日语网课靠谱吗"38 次，用户 B 临门期反复触达"新东方德语1v1到底多少钱""在北京新东方上德语课的一天"。需求维度也验证：「价格/性价比决策」流转率 0.45% 是 13 档第一。<strong>做法</strong>：把价格与体验从"回避话题"转为"主动内容"——明确的价格区间、课时构成、和低价机构的差异说明，配学员真实上课记录。
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">3. "一站式小语种 + 留学"产品矩阵</div>
+      用户 A 临门期一口气看 6 篇多语种内容（德语/日语/法语/留学校区）——多语种 + 留学一站式是新东方相对个人博主与单语种机构的结构性优势，个人老师 IP 无法复制。<strong>做法</strong>：产出"全语种课程体系""语言 + 留学申请一站式路径"系列内容，作为品牌层内容与老师 IP 层形成互补。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">P2-3 · 场域优化（视频质量提升、内流抢占）</div>
+    <p style="margin-bottom:12px;color:var(--text-secondary);font-size:14px;">视频内流是本品牌最大的场域缺口，且行业 Top1 决策路径高度依赖该场域。</p>
+    <table>
+      <tr><th>场域</th><th>当前状态</th><th>建议</th></tr>
+      <tr class="highlight-row" style="background:#FFF3E0;">
+        <td><strong>视频内流</strong></td>
+        <td><strong>最大缺口：本品牌 4.21% vs 小语种行业 32.43%，差 7.7 倍</strong></td>
+        <td>行业 Top1 转化路径是"视频内流→信息流→视频内流→信息流→视频内流→转化"，视频内流是行业验证过的主转化场域而本品牌基本缺席。<strong>抢占动作</strong>：每周产出 3-5 条视频笔记，形态优先老师试讲片段、课堂实况、发音纠音演示、学员上课 vlog——这些恰好也是名师 IP 化的载体，两件事一起做。<strong>质量要求</strong>：不要把图文笔记配图做成轮播视频，需要真人出镜与教学场景，对齐个人老师账号的内容质感（这类账号正是靠视频内流跑出 9%~17% CTR）</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><strong>搜索流</strong></td>
+        <td>本品牌主阵地，50.15%</td>
+        <td>继续卡位品类搜索词并补齐 P0 的语种缺口（葡语/意语/韩语从 0 到 1、德语加码）｜ 搜索场域是德语（0.56%）、少儿（0.74%）、学员口碑（0.93%）三类内容流转率最高的场域，优先把这三类内容做成搜索承接页</td>
+      </tr>
+      <tr>
+        <td><strong>信息流</strong></td>
+        <td>品牌 retargeting 场域，34.43%</td>
+        <td>对已触达用户做分层 retargeting，按决策阶段推送不同内容（早期品类探索 / 中期品牌对比 / 临门价格与口碑验证），而非全量推同一套素材</td>
+      </tr>
+      <tr>
+        <td><strong>UGC / 蒲公英</strong></td>
+        <td>均为 0，行业 5.23% / 0.91%</td>
+        <td>见 P1 账号矩阵搭建——这两个场域不是投放配比问题，是能力从 0 搭建问题</td>
+      </tr>
+      <tr>
+        <td><strong>日语线（消耗最大语种）</strong></td>
+        <td>313 条笔记、消耗 66.1 万为全语种最高，流转率 0.15% 低于大盘 0.21%</td>
+        <td>消耗最大的语种效率不达标，影响面最广。建议优先在日语线试点名师 IP 与 UGC 口碑内容（"新东方日语网课靠谱吗"38 次搜索，日语的口碑验证需求最集中），并按 P2-1 做决策阶段拆分投放</td>
+      </tr>
+    </table>
+  </div>
+
+  
+
+</div>
+
+
+<script>
+function switchTab(n) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab' + n).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+
+
+</body></html>
